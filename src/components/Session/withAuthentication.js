@@ -3,6 +3,8 @@ import React from 'react';
 import AuthUserContext from './context';
 import { withFirebase } from '../Firebase';
 
+import railsPost from '../Content/Rails';
+
 const withAuthentication = (Component) => {
   class WithAuthentication extends React.Component {
     constructor(props) {
@@ -16,9 +18,10 @@ const withAuthentication = (Component) => {
     componentDidMount() {
       this.listener = this.props.firebase.onAuthUserListener(
         (authUser) => {
-                        console.log(authUser);
           localStorage.setItem('authUser', JSON.stringify(authUser));
           this.setState({ authUser });
+          console.log("AuthUser:", authUser);
+          railsPost(authUser);
         },
         () => {
           localStorage.removeItem('authUser');

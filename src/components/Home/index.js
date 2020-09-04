@@ -14,12 +14,14 @@ class HomePage extends Component {
     };
   }
 
+
   componentDidMount() {
     this.props.firebase.users().on('value', (snapshot) => {
       this.setState({
         users: snapshot.val(),
       });
     });
+
   }
 
   componentWillUnmount() {
@@ -38,7 +40,7 @@ class HomePage extends Component {
   }
 }
 
-const condition = (authUser) => !!authUser;
+const condition = (authUser) =>!!authUser;
 
 export default compose(
   withFirebase,

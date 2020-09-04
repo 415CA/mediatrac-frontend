@@ -12,4 +12,9 @@ movies.defaults.headers.common['Content-type'] = contentType;
 
 const image = 'https://image.tmdb.org/t/p/original/';
 
-export { movies, image };
+const rails = axios.create({
+  baseURL: 'http://localhost:3000',
+});
+rails.defaults.headers.common['Content-type'] = 'Application/json';
+
+export { movies, image, rails };
