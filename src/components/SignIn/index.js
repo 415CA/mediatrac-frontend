@@ -7,14 +7,28 @@ import { PasswordForgetLink } from '../PasswordForget';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Segment,
+} from 'semantic-ui-react';
+
 const SignInPage = () => (
-  <div>
-    <h1>SignIn</h1>
-    <SignInForm />
-    <SignInGoogle />
-    <PasswordForgetLink />
-    <SignUpLink />
-  </div>
+  <Grid centered columns={2}>
+    <Grid.Column>
+      <Header as="h2" textAlign="center">
+        SignIn
+      </Header>
+      <Segment textAlign="center">
+        <SignInForm />
+        <SignInGoogle />
+        <PasswordForgetLink />
+        <SignUpLink />
+      </Segment>
+    </Grid.Column>
+  </Grid>
 );
 
 const INITIAL_STATE = {
@@ -66,27 +80,33 @@ class SignInFormBase extends Component {
     const isInvalid = password === '' || email === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
+      <Form size="large" onSubmit={this.onSubmit}>
+        <Form.Input
           name="email"
           value={email}
           onChange={this.onChange}
           type="text"
           placeholder="Email Address"
         />
-        <input
+        <Form.Input
           name="password"
           value={password}
           onChange={this.onChange}
           type="password"
           placeholder="Password"
         />
-        <button disabled={isInvalid} type="submit">
-          Sign In
-        </button>
 
+        <Button
+          type="submit"
+          disabled={isInvalid}
+          color="blue"
+          fluid
+          size="large"
+        >
+          Sign In
+        </Button>
         {error && <p>{error.message}</p>}
-      </form>
+      </Form>
     );
   }
 }
@@ -133,11 +153,10 @@ class SignInGoogleBase extends Component {
     const { error } = this.state;
 
     return (
-      <form onSubmit={this.onSubmit}>
+      <Form onSubmit={this.onSubmit}>
         <button type="submit">Sign In with Google</button>
-
         {error && <p>{error.message}</p>}
-      </form>
+      </Form>
     );
   }
 }

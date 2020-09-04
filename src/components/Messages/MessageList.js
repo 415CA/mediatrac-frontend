@@ -2,10 +2,16 @@ import React from 'react';
 
 import MessageItem from './MessageItem';
 
-const MessageList = ({ messages, onEditMessage, onRemoveMessage }) => (
+const MessageList = ({
+  authUser,
+  messages,
+  onEditMessage,
+  onRemoveMessage,
+}) => (
   <ul>
     {messages.map((message) => (
       <MessageItem
+        authUser={authUser}
         key={message.uid}
         message={message}
         onEditMessage={onEditMessage}

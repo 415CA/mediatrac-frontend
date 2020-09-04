@@ -10,26 +10,39 @@ import HomePage from '../Home';
 import AccountPage from '../Account';
 import AdminPage from '../Admin';
 
+import Movies from '../Content/Movies';
+import Favorites from '../Content/Favorites';
+import Watched from '../Content/Watched';
+import Upcoming from '../Content/Upcoming';
+
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
 
+import { Container } from 'semantic-ui-react';
+
 const App = () => (
-  <Router>
-    <div>
-      <Navigation />
 
-      <hr />
+  <Container>
+    <Router>
+      <div>
+        <Navigation />
+        <hr />
+        <Route exact path={ROUTES.LANDING} component={LandingPage} />
+        <Route exact path={ROUTES.SIGN_UP} component={SignUpPage} />
+        <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
+        <Route exact path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
+        <Route exact path={ROUTES.HOME} component={HomePage} />
+        <Route exact path={ROUTES.ACCOUNT} component={AccountPage} />
+        <Route exact path={ROUTES.ADMIN} component={AdminPage} />
 
-      <Route exact path={ROUTES.LANDING} component={LandingPage} />
-      <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
-      <Route path={ROUTES.SIGN_IN} component={SignInPage} />
-      <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
-      <Route path={ROUTES.HOME} component={HomePage} />
-      <Route path={ROUTES.ACCOUNT} component={AccountPage} />
-      <Route path={ROUTES.ADMIN} component={AdminPage} />
-    </div>
-  </Router>
+        <Route exact path={ROUTES.MOVIES} component={Movies} />
+        {/* <Route exact path={ROUTES.MOVIE_DETAILS} component={MovieItem} /> */}
+        <Route exact path={ROUTES.FAVORITES} component={Favorites} />
+        <Route exact path={ROUTES.WATCHED} component={Watched} />
+        <Route exact path={ROUTES.UPCOMING} component={Upcoming} />
+      </div>
+    </Router>
+  </Container>
 );
 
 export default withAuthentication(App);
-

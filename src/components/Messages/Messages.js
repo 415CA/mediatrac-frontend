@@ -67,8 +67,10 @@ class Messages extends Component {
   };
 
   onEditMessage = (message, text) => {
+    const { uid, ...messageSnapshot } = message;
+
     this.props.firebase.message(message.uid).set({
-      ...message,
+      ...messageSnapshot,
       text,
       editedAt: this.props.firebase.serverValue.TIMESTAMP,
     });
@@ -80,13 +82,12 @@ class Messages extends Component {
 
   onNextPage = () => {
     this.setState(
-      (state) => ({ limit: state.limit + 10 }),
+      (state) => ({ limit: state.limit + 5 }),
       this.onListenForMessages
     );
   };
 
   render() {
-    const { users } = this.props;
     const { text, messages, loading } = this.state;
 
     return (
@@ -103,12 +104,8 @@ class Messages extends Component {
 
             {messages && (
               <MessageList
-                messages={messages.map((message) => ({
-                  ...message,
-                  user: users
-                    ? users[message.userId]
-                    : { userId: message.userId },
-                }))}
+                authUser={authUser}
+                messages={messages}
                 onEditMessage={this.onEditMessage}
                 onRemoveMessage={this.onRemoveMessage}
               />
