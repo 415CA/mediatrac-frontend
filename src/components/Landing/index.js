@@ -26,6 +26,7 @@ const Landing = () => {
   }, []);
 
   const { banner, data } = feature;
+  console.log(banner)
 
   const displayRow = data.map((movie) => {
     return (

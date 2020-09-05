@@ -5,7 +5,7 @@ import { AuthUserContext } from '../Session';
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
-import Search from '../Content/Search'
+// import Search from '../Content/Search'
 
 import { Container, Menu, Input} from 'semantic-ui-react';
 
@@ -21,36 +21,36 @@ const Navigation = () => (
 const NavigationAuth = ({ authUser }) => (
   <Menu secondary>
     <Container>
-      <Menu.Item as="a" header>
+      <Menu.Item header>
         <Link to={ROUTES.LANDING}>Landing</Link>
       </Menu.Item>
 
-      <Menu.Item as="a" header>
+      <Menu.Item header>
         <Link to={ROUTES.HOME}>Home</Link>
       </Menu.Item>
 
-      <Menu.Item as="a" header>
+      <Menu.Item header>
         <Link to={ROUTES.ACCOUNT}>Account</Link>
       </Menu.Item>
 
-      <Menu.Item as="a" header>
+      <Menu.Item header>
         <Link to={ROUTES.MOVIES}>Movies</Link>
       </Menu.Item>
 
-      <Menu.Item as="a" header>
+      <Menu.Item header>
         <Link to={ROUTES.FAVORITES}>Favorites</Link>
       </Menu.Item>
 
-      <Menu.Item as="a" header>
+      <Menu.Item header>
         <Link to={ROUTES.WATCHED}>Watched</Link>
       </Menu.Item>
 
-      <Menu.Item as="a" header>
+      <Menu.Item header>
         <Link to={ROUTES.UPCOMING}>Upcoming</Link>
       </Menu.Item>
 
       {authUser.roles.includes(ROLES.ADMIN) && (
-        <Menu.Item as="a" header>
+        <Menu.Item header>
           <Link to={ROUTES.ADMIN}>Admin</Link>
         </Menu.Item>
       )}
@@ -70,11 +70,11 @@ const NavigationAuth = ({ authUser }) => (
 const NavigationNonAuth = () => (
   <Menu>
     <Container>
-      <Menu.Item as="a" header>
+      <Menu.Item header>
         <Link to={ROUTES.LANDING}>Landing</Link>
       </Menu.Item>
 
-      <Menu.Item as="a" header>
+      <Menu.Item header>
         <Link to={ROUTES.SIGN_IN}>Sign In</Link>
       </Menu.Item>
     </Container>

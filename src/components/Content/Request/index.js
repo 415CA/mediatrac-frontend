@@ -20,4 +20,49 @@ const genre = {
   nowPlaying: `/discover/movie/now_playing?api_key=${API_KEY}&language=en-US&append_to_response=videos,images&include_image_language=en`,
 };
 
-export { genre };
+const search = (query, pageNum) => {
+  return `/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=${pageNum}&include_adult=false`
+}
+
+const details = (tmdbID) => {
+  return `/movie/${tmdbID}?api_key=${API_KEY}&language=en-US&append_to_response=%26append_to_response%3Dvideos%2Cimages`
+}
+
+const videos = (tmdbID) => {
+  return `/movie/${tmdbID}/videos?api_key=${API_KEY}&language=en-US`
+}
+
+const recommendations = (tmdbID, pageNum) => {
+  return `/movie/${tmdbID}/recommendations?api_key=${API_KEY}&language=en-US&page=${pageNum}`
+}
+
+const similarMovies = (tmdbID, pageNum) => {
+  return `/movie/${tmdbID}/similar?api_key=${API_KEY}&language=en-US&page=${pageNum}`
+}
+
+const reviews = (tmdbID, pageNum) => {
+  return `/movie/${tmdbID}/reviews?api_key=${API_KEY}&language=en-US&page=${pageNum}`
+}
+
+const credits = (tmdbID) => {
+  return `/movie/${tmdbID}/credits?api_key=${API_KEY}`
+}
+
+const socialMedia = (tmdbID) => {
+  return `/movie/${tmdbID}/external_ids?api_key=${API_KEY}`
+}
+
+const explore = (tmdbID, pageNum = 1) => {
+  return {
+    details: details(tmdbID),
+    videos: videos(tmdbID),
+    recommendations: recommendations(tmdbID, pageNum),
+    similarMovies: similarMovies(tmdbID, pageNum),
+    reviews: reviews(tmdbID, pageNum),
+    credits: credits(tmdbID),
+    socialMedia: socialMedia(tmdbID),
+
+  }
+}
+
+export { genre, search, explore };

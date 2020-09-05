@@ -17,4 +17,4 @@ const rails = axios.create({
 });
 rails.defaults.headers.common['Content-type'] = 'Application/json';
 
-export { movies, image, rails };
+export { movies, image, rails, axios };
