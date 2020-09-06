@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { axios, movies, image } from '../../Content/Axios';
 import { genre, explore } from '../../Content/Request';
-
-// import { useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 import { Card } from 'semantic-ui-react';
 
 // import MovieList from '.'
-// import MovieDetails from '.';
+import MovieDetails from '.';
 
 const Movies = () => {
   const [feature, setFeature] = useState([]);
@@ -23,15 +22,6 @@ const Movies = () => {
 
   movies.get(explore(337401).details).then(res => console.log('Mulan', res))
 
-  // useEffect(() => {
-  //   const getBanner = () => {
-  //     movies.get(genre.animation).then((display) => {
-  //       setFeature(display.data.results);
-  //     });
-  //   };
-  //   getBanner();
-  // }, []);
-
   const req = [
     movies.get(explore(337401).details),
     movies.get(explore(337401).videos),
@@ -42,18 +32,13 @@ const Movies = () => {
     movies.get(explore(337401).socialMedia)
   ]
 
-  axios.all([req]).then(axios.spread((...responses) => {
-    console.log('Details', responses[0][0])
-    console.log('Videos', responses)
-    console.log(responses[2])
-    console.log(responses[3])
-    console.log(responses[4])
-    console.log(responses[5])
-    console.log(responses[6])
-    console.log(responses[7])
-  })).catch(errors => {
-    console.log('Error', errors)
-  })
+  const convertDetails = () => {
+    axios.all([req]).then(axios.spread((...responses) => {
+      console.log('Details', responses)
+    })).catch(errors => {
+      console.log('Error', errors)
+    })
+  }
 
   const truncate = (description, n) => {
     return description?.length > n ? description.substr(0, n - 1) + '...' : description;
@@ -61,6 +46,7 @@ const Movies = () => {
 
   const displayRow = feature.map((movie) => {
     return (
+      <Fragment key={movie.id}>
         <Card
           key={movie.id}
           image={`${image}${movie.poster_path}`}
@@ -68,9 +54,11 @@ const Movies = () => {
           meta={`Rating: ${movie.vote_average}`}
           description={truncate(movie.overview, 75)}
           raised={true}
-          // onClick={console.log(movie.id)}
-          // render={}
+          href={`/movie/${movie.id}`}
+          movie={movie}
         />
+        <Route path={`/movie/:id`} render={MovieDetails} />
+      </Fragment>
     );
   });
 

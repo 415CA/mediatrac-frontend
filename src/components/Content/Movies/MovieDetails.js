@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { movies, image } from '../Axios';
-import { genre } from '../Request';
+import React, { useState, useEffect, Fragment } from 'react';
+import { axios, movies, image } from '../../Content/Axios';
+import { genre, explore } from '../../Content/Request';
 import { Grid, Image, Card, Icon } from 'semantic-ui-react';
 
 const MovieDetails = () => (
@@ -9,8 +9,4 @@ const MovieDetails = () => (
   </div>
 );
 
-export default compose(
-  withFirebase,
-  withEmailVerification,
-  withAuthorization(condition)
-)(MovieDetails);
+export default MovieDetails;
