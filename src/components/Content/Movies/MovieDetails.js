@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { axios, movies, image} from '../../Content/Axios';
-import { explore } from '../../Content/Request';
+import { explore, tmdbGenres } from '../../Content/Request';
 import {
   Grid,
   Image,
@@ -64,20 +64,23 @@ const MovieDetails = (props) => {
         details();
     }, []);
 
+    const truncate = (description, n) => {
+      return description?.length > n
+        ? description.substr(0, n - 1) + '...'
+        : description;
+    };
+
     let similarToRender;
     if (similarMovies.results) {
       similarToRender = similarMovies.results.map((movie) => {
         return (
-          // <List.Item key={movie.id}>
-            <Image
-              key={movie.id}
-              src={`${image}${movie.poster_path}`}
-              as="a"
-              size="small"
-              href="http://google.com"
-              target="_blank"
-            />
-          // </List.Item>
+          <Image
+            key={movie.id}
+            src={`${image}${movie.poster_path}`}
+            as="a"
+            size="small"
+            href={`/movies/${movie.id}`}
+          />
         );
       });
     }
@@ -85,10 +88,10 @@ const MovieDetails = (props) => {
     
     let videoToRender; 
     if (videos.results) {
-      videoToRender = videos.results.slice(0, 5).map((movie) => {
+      videoToRender = videos.results.slice(0, 10).map((movie) => {
         return (
           <Fragment key={movie.key}>
-            <Header>{movie.name}</Header>
+            <Header as='h5' >{truncate(movie.name, 30)}</Header>
             <Embed
               id={movie.key}
               placeholder={`${image}${details.backdrop_path}`}
@@ -100,17 +103,21 @@ const MovieDetails = (props) => {
         );
       });
     }
-    
+
+    console.log(videos.results);
+
     let reviewToRender;
     if (reviews.results) {
       reviewToRender = reviews.results.map((review) => {
         return (
-            <Comment key={review.id}>
-              <Comment.Content>
-                  <Comment.Author>{review.author}</Comment.Author>
-                <Comment.Text>{review.content}</Comment.Text>
-              </Comment.Content>
-            </Comment>
+          <Comment key={review.id}>
+            <Comment.Content>
+              <Comment.Author as="a" href={review.url}>
+                {review.author}
+              </Comment.Author>
+              <Comment.Text>{truncate(review.content, 800)}</Comment.Text>
+            </Comment.Content>
+          </Comment>
         );
       });
     }
@@ -123,7 +130,7 @@ const MovieDetails = (props) => {
             key={actor.id}
             image={`${image}${actor.profile_path}`}
             header={actor.name}
-            description={ actor.character }
+            description={ truncate(actor.character, 30) }
             raised={true}
           />
         );
@@ -269,35 +276,40 @@ const MovieDetails = (props) => {
       );
     }
 
-    console.log(similarMovies);
+    console.log(reviews.results);
 
     return (
       <div>
         {backgroundHeader()}
-        <h1>{details.title}</h1>
-        <List borderless>
-          <List.Item>{detailsToRender()}</List.Item>
-          <List.Item>{socialMediaToRender()}</List.Item>
-          <Divider />
-          <List.Item>
-            <Container textAlign="justified">
-              Description: {details.overview}
-            </Container>
-          </List.Item>
-        </List>
-        <Image
-          src={`${image}${details.backdrop_path}`}
-          size="medium"
-          bordered
-        />
-        <Image src={`${image}${details.poster_path}`} size="medium" bordered />
+        <Grid celled="internally" stackable columns={2}>
+          <Grid.Row>
+            <Grid.Column width={3}>
+              <Image
+                src={`${image}${details.poster_path}`}
+                size="medium"
+                bordered
+              />
+            </Grid.Column>
+            <Grid.Column width={10}>
+              <h1>{details.title}</h1>
+              <List borderless>
+                <List.Item>{detailsToRender()}</List.Item>
+                <List.Item>{socialMediaToRender()}</List.Item>
+                <Divider />
+                <List.Item>
+                  <Container textAlign="justified">
+                    Description: {details.overview}
+                  </Container>
+                </List.Item>
+              </List>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+
         <Header as="h3" dividing>
           Similar Movies
         </Header>
         <Slider {...sliderSettings}>{similarToRender}</Slider>
-        <Header as="h3" dividing>
-          Movie Details
-        </Header>
         <Header as="h3" dividing>
           Cast
         </Header>
@@ -306,9 +318,9 @@ const MovieDetails = (props) => {
           Crew
         </Header>
         <Slider {...sliderSettings}>{crewToRender}</Slider>
-        <Link target={'_blank'} to={details.homepage}>
-          Your Link
-        </Link>
+        <Header as="h3" dividing>
+          Videos
+        </Header>
         <Slider {...sliderSettings}>{videoToRender}</Slider>
         <Header as="h3" dividing>
           Comments
