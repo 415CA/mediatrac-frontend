@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { axios, movies, image } from '../../Content/Axios';
-import { genre, explore } from '../../Content/Request';
+import { movies, image } from '../../Content/Axios';
+import { genre } from '../../Content/Request';
 import { Route } from 'react-router-dom';
 
 import MovieDetails from '.';
@@ -19,30 +19,6 @@ const Movies = () => {
     }
     getMovies();
   }, []);
-
-
-  // const req = [
-  //   movies.get(explore(337401).details),
-  //   movies.get(explore(337401).videos),
-  //   movies.get(explore(337401).recommendations),
-  //   movies.get(explore(337401).similarMovies),
-  //   movies.get(explore(337401).reviews),
-  //   movies.get(explore(337401).credits),
-  //   movies.get(explore(337401).socialMedia),
-  // ];
-
-  // const convertDetails = () => {
-  //   axios
-  //     .all([req])
-  //     .then(
-  //       axios.spread((...responses) => {
-  //         console.log('Details', responses);
-  //       })
-  //     )
-  //     .catch((errors) => {
-  //       console.log('Error', errors);
-  //     });
-  // };
 
   const truncate = (description, n) => {
     return description?.length > n

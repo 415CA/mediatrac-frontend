@@ -10,7 +10,7 @@ const movies = axios.create({
 movies.defaults.headers.common['Authorization'] = apiKey;
 movies.defaults.headers.common['Content-type'] = contentType;
 
-const image = 'https://image.tmdb.org/t/p/original/';
+const image = 'https://image.tmdb.org/t/p/original';
 
 const rails = axios.create({
   baseURL: 'http://localhost:3000',
