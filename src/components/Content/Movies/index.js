@@ -1,9 +1,9 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { movies, image } from '../../Content/Axios';
 import { genre } from '../../Content/Request';
-import { Route } from 'react-router-dom';
+// import { Route } from 'react-router-dom';
 
-import MovieDetails from '.';
+// import MovieDetails from '.';
 
 import { Card } from 'semantic-ui-react';
 

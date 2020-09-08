@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { axios, movies } from '../Axios';
 import { explore } from '../Request';
+import Film from '.';
 
 
 const FilmData = (props) => {
@@ -41,15 +42,19 @@ const FilmData = (props) => {
       details();
   }, []);
 
-  return {
-    details,
-    videos,
-    recommendations,
-    similarMovies,
-    reviews,
-    credits,
-    socialMedia,
-  };
+  // export const data = {
+  //   details,
+  //   videos,
+  //   recommendations,
+  //   similarMovies,
+  //   reviews,
+  //   credits,
+  //   socialMedia,
+  // };
+
+  return (
+    <Film data={data} />
+  );
 
 }
 

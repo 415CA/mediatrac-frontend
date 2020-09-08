@@ -7,7 +7,7 @@ import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
 import Search from '../Content/Search'
 
-import { Container, Menu, Input} from 'semantic-ui-react';
+import { Container, Menu} from 'semantic-ui-react';
 
 const Navigation = () => (
   <AuthUserContext.Consumer>

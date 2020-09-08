@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { axios, movies, image} from '../../Content/Axios';
-import { explore, tmdbGenres } from '../../Content/Request';
+import { explore } from '../../Content/Request';
 import {
   Grid,
   Image,
@@ -9,21 +9,18 @@ import {
   Embed,
   Comment,
   Card,
-  Button,
   Icon,
   List,
-  Segment,
-  Menu,
   Divider,
-  Accordion,
 } from 'semantic-ui-react';
-import Movies from '../Movies';
-import { render } from '@testing-library/react';
-import { renderComponent } from 'recompose';
-import { Link } from 'react-router-dom';
-import { SocialIcon } from 'react-social-icons';
+// import Movies from '../Movies';
+// import { render } from '@testing-library/react';
+// import { renderComponent } from 'recompose';
+// import { Link } from 'react-router-dom';
+// import { SocialIcon } from 'react-social-icons';
 
 import Slider from 'react-slick';
+import FilmDetailsMod from '../Films/FilmDetailsMod';
 
 const MovieDetails = (props) => {
   const tmdbID = props.match.params.id;
@@ -104,7 +101,7 @@ const MovieDetails = (props) => {
       });
     }
 
-    console.log(videos.results);
+    console.log("Recomendations", recommendations.results);
 
     let reviewToRender;
     if (reviews.results) {
@@ -213,7 +210,7 @@ const MovieDetails = (props) => {
             <List.Item>
               <List.Content>
                 <List.Header>User Score</List.Header>
-              <Icon name="user outline" />
+                <Icon name="user outline" />
                 {details.vote_average}
               </List.Content>
             </List.Item>

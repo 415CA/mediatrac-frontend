@@ -12,12 +12,9 @@ import PasswordChangeForm from '../PasswordChange';
 
 import {
   Form,
-  Input,
   Button,
-  Label,
   Grid,
   Segment,
-  Divider,
   Icon
 } from 'semantic-ui-react';
 

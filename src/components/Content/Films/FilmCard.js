@@ -1,12 +1,16 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Card } from 'semantic-ui-react';
 
-const FilmCard = (movieArray) => {
+const FilmCard = ({movieArray}) => {
 
   const truncate = (description, n) => {
     return description?.length > n
       ? description.substr(0, n - 1) + '...'
       : description;
+  };
+
+  const movieDetails = (movie) => {
+    localStorage.setItem('selectedMovie', movie);
   };
 
   const createCard = (movieArray) => {
@@ -29,7 +33,7 @@ const FilmCard = (movieArray) => {
 
   return (
     <Fragment>
-      <Card.Group itemsPerRow={5}>{displayRow}</Card.Group>
+      <Card.Group itemsPerRow={5}>{createCard(movieArray)}</Card.Group>
       <Route path={`/movies/:id`} component={MovieDetails} />
     </Fragment>
   );

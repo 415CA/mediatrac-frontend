@@ -1,30 +1,15 @@
-import { useEffect, useState, Fragment } from 'react';
-import { axios, movies, image } from '../Axios';
-import { explore, tmdbGenres } from '../Request';
-import {
-  Grid,
-  Image,
-  Header,
-  Container,
-  Embed,
-  Comment,
-  Card,
-  Button,
-  Icon,
-  List,
-  Segment,
-  Menu,
-  Divider,
-  Accordion,
-} from 'semantic-ui-react';
-import Movies from '../Movies';
-import { render } from '@testing-library/react';
-import { renderComponent } from 'recompose';
-import { Link } from 'react-router-dom';
-import { SocialIcon } from 'react-social-icons';
+import React, { Fragment } from 'react';
+import { image } from '../Axios';
+import { Header, Embed,} from 'semantic-ui-react';
 
-const ShowVideos = (videos) => {
+const ShowVideos = ({videos, details}) => {
   let videoToRender;
+
+  const truncate = (description, n) => {
+    return description?.length > n
+      ? description.substr(0, n - 1) + '...'
+      : description;
+  };
 
   if (videos.results) {
     videoToRender = videos.results.slice(0, 10).map((movie) => {

@@ -1,4 +1,7 @@
-const Social = (socialMedia) => {
+import React from 'react';
+import { List, Icon } from 'semantic-ui-react';
+
+const Social = ({details, socialMedia}) => {
   if (socialMedia) {
     return (
       <List compact borderless horizontal>

@@ -1,4 +1,8 @@
-const backgroundHeader = () => {
+import React from 'react';
+import { Container, Header, } from 'semantic-ui-react';
+
+const Header = ({details}) => {
+
   return (
     <Container>
       <Header
@@ -22,3 +26,5 @@ const backgroundHeader = () => {
     </Container>
   );
 };
+
+export default Header

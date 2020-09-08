@@ -2,11 +2,11 @@ import React from 'react';
 import { image } from '../Axios';
 import { Image } from 'semantic-ui-react';
 
-const SimilarFilms = ({ similarMovies }) => {
-  let showFilms;
+const Recommendations = ({ recommendations }) => {
+  let showRecommendations;
 
-  if (similarMovies.results) {
-    showFilms = similarMovies.results.map((movie) => {
+  if (recommendations.results) {
+    showRecommendations = recommendations.results.map((movie) => {
       return (
         <Image
           key={movie.id}
@@ -19,7 +19,7 @@ const SimilarFilms = ({ similarMovies }) => {
     });
   }
 
-  return showFilms;
+  return showRecommendations;
 };
 
-export default SimilarFilms;
+export default Recommendations;

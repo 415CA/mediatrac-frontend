@@ -12,3 +12,5 @@ export const MOVIE_DETAILS = '/movies/:id'
 export const FAVORITES = '/favorites'
 export const WATCHED = '/watched'
 export const UPCOMING = '/upcoming'
+export const FILMS = '/films/:id';
+export const FILM_DETAILS = '/films/:id';

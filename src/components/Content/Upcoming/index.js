@@ -1,21 +1,10 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, useState } from 'react';
 import { axios, movies, image } from '../../Content/Axios';
 import { genre } from '../../Content/Request';
 import {
-  Grid,
+
   Image,
   Header,
-  Container,
-  Embed,
-  Comment,
-  Card,
-  Button,
-  Icon,
-  List,
-  Segment,
-  Menu,
-  Divider,
-  Accordion,
 } from 'semantic-ui-react';
 
 // import { useHistory } from 'react-router-dom';
@@ -23,7 +12,7 @@ import {
 import Slider from 'react-slick';
 
 const Upcoming = () => {
-  const [feature, setFeature] = useState([]);
+  // const [feature, setFeature] = useState([]);
   const [action, setAction] = useState([]);
   const [adventure, setAdventure] = useState([]);
   const [animation, setAnimation] = useState([]);
@@ -36,29 +25,29 @@ const Upcoming = () => {
   const [scienceFiction, setScienceFiction] = useState([]);
   const [thriller, setThriller] = useState([]);
   const [trending, setTrending] = useState([]);
-  const [popular, setPopular] = useState([]);
-  const [discover, setDiscover] = useState([]);
-  const [upcoming, setUpcoming] = useState([]);
-  const [nowPlaying, setNowPlaying] = useState([]);
+  // const [popular, setPopular] = useState([]);
+  // const [discover, setDiscover] = useState([]);
+  // const [upcoming, setUpcoming] = useState([]);
+  // const [nowPlaying, setNowPlaying] = useState([]);
 
-  const categories = [
-    action,
-    adventure,
-    animation,
-    comedy,
-    documentary,
-    drama,
-    family,
-    horror,
-    romance,
-    scienceFiction,
-    thriller,
-    trending,
-    // popular,
-    // discover,
-    // upcoming,
-    // nowPlaying,
-  ];
+  // const categories = [
+  //   action,
+  //   adventure,
+  //   animation,
+  //   comedy,
+  //   documentary,
+  //   drama,
+  //   family,
+  //   horror,
+  //   romance,
+  //   scienceFiction,
+  //   thriller,
+  //   trending,
+  //   popular,
+  //   discover,
+  //   upcoming,
+  //   nowPlaying,
+  // ];
 
   // useEffect(() => {
   //   const getBanner = () => {
@@ -138,34 +127,34 @@ const Upcoming = () => {
   //     );
   //   });
 
-  const sliderPosters = (category) => {
-    category.map((movie) => {
-      return (
-        <Image
-          key={movie.id}
-          src={`${image}${movie.poster_path}`}
-          as="a"
-          size="small"
-          href={`/movies/${movie.id}`}
-        />
-      );
-    });
-  };
+  // const sliderPosters = (category) => {
+  //   category.map((movie) => {
+  //     return (
+  //       <Image
+  //         key={movie.id}
+  //         src={`${image}${movie.poster_path}`}
+  //         as="a"
+  //         size="small"
+  //         href={`/movies/${movie.id}`}
+  //       />
+  //     );
+  //   });
+  // };
 
-  let actionToRender;
-  if (action) {
-    actionToRender = action.map((movie) => {
-      return (
-        <Image
-          key={movie.id}
-          src={`${image}${movie.poster_path}`}
-          as="a"
-          size="small"
-          href={`/movies/${movie.id}`}
-        />
-      );
-    });
-  }
+  // let actionToRender;
+  // if (action) {
+  //   actionToRender = action.map((movie) => {
+  //     return (
+  //       <Image
+  //         key={movie.id}
+  //         src={`${image}${movie.poster_path}`}
+  //         as="a"
+  //         size="small"
+  //         href={`/movies/${movie.id}`}
+  //       />
+  //     );
+  //   });
+  // }
 
   console.log(action)
 

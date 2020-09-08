@@ -11,6 +11,7 @@ class HomePage extends Component {
 
     this.state = {
       users: null,
+      movies: [],
     };
   }
 
@@ -26,15 +27,11 @@ class HomePage extends Component {
     this.props.firebase.users().off();
   }
 
-  submitSearch(data) {
-    this.setState({ movies: data });
-  }
 
   render() {
     return (
       <div>
         <h1>Home Page</h1>
-        <Search users={this.state.users} submitSearch={this.submitSearch} />
       </div>
     );
   }

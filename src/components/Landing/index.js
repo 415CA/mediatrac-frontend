@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { movies, image } from '../Content/Axios';
 import { genre } from '../Content/Request';
 
-import { Grid, Image, Container, Header } from 'semantic-ui-react';
+// import { Grid, Image, Container, Header } from 'semantic-ui-react';
 
 const Landing = () => {
   const [feature, setFeature] = useState({

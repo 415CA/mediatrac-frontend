@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { compose } from 'recompose';
 
 import { withFirebase } from '../../Firebase';
@@ -7,10 +7,10 @@ import { withAuthorization, withEmailVerification } from '../../Session';
 
 import * as ROUTES from '../../../constants/routes';
 
-import { movies, image } from '../Axios';
+import { movies } from '../Axios';
 import { genre } from '../Request';
 
-import { Grid, Image } from 'semantic-ui-react';
+// import { Grid, Image } from 'semantic-ui-react';
 
 
 const MoviePage = () => (

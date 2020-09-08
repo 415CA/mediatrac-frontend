@@ -1,10 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { movies, image, axios } from '../../Content/Axios';
-import { genre, search, API_KEY } from '../../Content/Request';
+import { axios } from '../../Content/Axios';
+import { API_KEY } from '../../Content/Request';
 import { Button, Input } from 'semantic-ui-react';
-import { WATCHED } from '../../../constants/routes';
-import Watched from '../Watched'
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 const Search = () => {
   const [data, setData] = useState({ hits: [] });
@@ -21,6 +18,10 @@ const Search = () => {
     fetchData();
   }, [url]);
 
+  console.log()
+
+
+
   return (
     <Fragment>
       <Input
@@ -30,11 +31,11 @@ const Search = () => {
       />
       <Button
         type="button"
-        onClick={() =>
+        onClick={() => {
           setUrl(
             `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&include_adult=false`
           )
-        }
+        }}
       >
         Search
       </Button>

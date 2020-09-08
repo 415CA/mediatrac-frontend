@@ -1,4 +1,8 @@
-const Details = (details) => {
+import React from 'react';
+import { List, Icon } from 'semantic-ui-react';
+
+const Details = ({details}) => {
+
   if (details) {
     return (
       <List compact borderless horizontal>
