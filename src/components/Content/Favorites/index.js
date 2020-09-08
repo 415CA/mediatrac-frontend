@@ -63,21 +63,21 @@ const Favorites = () => {
   return (
     <div>
       <Fragment>
-          <Input
-            type="text"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-          />
-          <Button
-            type="button"
-            onSubmit={() => {
-              setUrl(
-                `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&include_adult=false`
-              );
-            }}
-          >
-            Search
-          </Button>
+        <Input
+          type="text"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+        />
+        <Button
+          type="button"
+          onClick={() => {
+            setUrl(
+              `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&include_adult=false`
+            );
+          }}
+        >
+          Search
+        </Button>
       </Fragment>
       <Fragment>
         <Card.Group itemsPerRow={5}>{displayRow(data, loading)}</Card.Group>
