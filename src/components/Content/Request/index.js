@@ -20,7 +20,7 @@ const genre = {
   nowPlaying: `/discover/movie/now_playing?api_key=${API_KEY}&language=en-US&append_to_response=videos,images&include_image_language=en`,
 };
 
-const search = (query, pageNum) => {
+const search = (query, pageNum = 1) => {
   return `/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=${pageNum}&include_adult=false`
 }
 
@@ -65,7 +65,6 @@ const explore = (tmdbID, pageNum = 1) => {
   }
 }
 
-
   const tmdbGenres = {
     '28': "Action",
     '12': "Adventure",
@@ -88,4 +87,4 @@ const explore = (tmdbID, pageNum = 1) => {
     '37': "Western",
   }
 
-export { genre, search, explore, tmdbGenres };
+export { genre, search, explore, tmdbGenres, API_KEY };

@@ -50,7 +50,7 @@ const movieDetails = (movie) => {
   return (
     <Fragment>
       <Card.Group itemsPerRow={5}>{displayRow}</Card.Group>
-      <Route path={`/movies/:id`} component={MovieDetails} />
+      {/* <Route path={`/movies/:id`} component={MovieDetails} /> */}
     </Fragment>
   );
 };

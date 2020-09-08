@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { withFirebase } from '../Firebase';
 
+import { Form, Input, Button, Label } from 'semantic-ui-react';
+
 const INITIAL_STATE = {
   passwordOne: '',
   passwordTwo: '',
@@ -40,27 +42,34 @@ class PasswordChangeForm extends Component {
     const isInvalid = passwordOne !== passwordTwo || passwordOne === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-          placeholder="New Password"
-        />
-        <input
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Confirm New Password"
-        />
-        <button disabled={isInvalid} type="submit">
-          Reset My Password
-        </button>
+      <Form onSubmit={this.onSubmit}>
+        <Form.Group inline>
+          <Form.Field>
+            <label>Change Password</label>
+            <Input
+              name="passwordOne"
+              value={passwordOne}
+              onChange={this.onChange}
+              type="password"
+              placeholder="New Password"
+            />
+          </Form.Field>
+          <Form.Field>
+            <Input
+              name="passwordTwo"
+              value={passwordTwo}
+              onChange={this.onChange}
+              type="password"
+              placeholder="Confirm New Password"
+            />
+          </Form.Field>
+          <Button disabled={isInvalid} type="submit">
+            Reset My Password
+          </Button>
 
-        {error && <p>{error.message}</p>}
-      </form>
+          {error && <p>{error.message}</p>}
+        </Form.Group>
+      </Form>
     );
   }
 }

@@ -1,14 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import { AuthUserContext } from '../Session';
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
-// import Search from '../Content/Search'
+import Search from '../Content/Search'
 
 import { Container, Menu, Input} from 'semantic-ui-react';
-
 
 const Navigation = () => (
   <AuthUserContext.Consumer>
@@ -22,42 +21,42 @@ const NavigationAuth = ({ authUser }) => (
   <Menu secondary>
     <Container>
       <Menu.Item header>
-        <Link to={ROUTES.LANDING}>Landing</Link>
+        <NavLink to={ROUTES.LANDING}>Landing</NavLink>
       </Menu.Item>
 
       <Menu.Item header>
-        <Link to={ROUTES.HOME}>Home</Link>
+        <NavLink to={ROUTES.HOME}>Home</NavLink>
       </Menu.Item>
 
       <Menu.Item header>
-        <Link to={ROUTES.ACCOUNT}>Account</Link>
+        <NavLink to={ROUTES.ACCOUNT}>Account</NavLink>
       </Menu.Item>
 
       <Menu.Item header>
-        <Link to={ROUTES.MOVIES}>Movies</Link>
+        <NavLink to={ROUTES.MOVIES}>Movies</NavLink>
       </Menu.Item>
 
       <Menu.Item header>
-        <Link to={ROUTES.FAVORITES}>Favorites</Link>
+        <NavLink to={ROUTES.FAVORITES}>Favorites</NavLink>
       </Menu.Item>
 
       <Menu.Item header>
-        <Link to={ROUTES.WATCHED}>Watched</Link>
+        <NavLink to={ROUTES.WATCHED}>Watched</NavLink>
       </Menu.Item>
 
       <Menu.Item header>
-        <Link to={ROUTES.UPCOMING}>Upcoming</Link>
+        <NavLink to={ROUTES.UPCOMING}>Upcoming</NavLink>
       </Menu.Item>
 
       {authUser.roles.includes(ROLES.ADMIN) && (
         <Menu.Item header>
-          <Link to={ROUTES.ADMIN}>Admin</Link>
+          <NavLink to={ROUTES.ADMIN}>Admin</NavLink>
         </Menu.Item>
       )}
 
       <Menu.Menu position="right">
         <Menu.Item>
-          <Input className="icon" icon="search" placeholder="Search..." />
+          <Search className="icon" icon="search" placeholder="Search..." />
         </Menu.Item>
         <Menu.Item as="a" name="signOut">
           <SignOutButton />

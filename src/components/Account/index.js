@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { compose } from 'recompose';
 
 import {
@@ -9,6 +9,17 @@ import {
 import { withFirebase } from '../Firebase';
 import { PasswordForgetForm } from '../PasswordForget';
 import PasswordChangeForm from '../PasswordChange';
+
+import {
+  Form,
+  Input,
+  Button,
+  Label,
+  Grid,
+  Segment,
+  Divider,
+  Icon
+} from 'semantic-ui-react';
 
 const SIGN_IN_METHODS = [
   {
@@ -87,38 +98,35 @@ class LoginManagementBase extends Component {
     const { activeSignInMethods, error } = this.state;
 
     return (
-      <div>
-        Sign In Methods:
-        <ul>
-          {SIGN_IN_METHODS.map((signInMethod) => {
-            const onlyOneLeft = activeSignInMethods.length === 1;
-            const isEnabled = activeSignInMethods.includes(signInMethod.id);
+      <Segment basic>
+        {SIGN_IN_METHODS.map((signInMethod) => {
+          const onlyOneLeft = activeSignInMethods.length === 1;
+          const isEnabled = activeSignInMethods.includes(signInMethod.id);
 
-            return (
-              <li key={signInMethod.id}>
-                {signInMethod.id === 'password' ? (
-                  <DefaultLoginToggle
-                    onlyOneLeft={onlyOneLeft}
-                    isEnabled={isEnabled}
-                    signInMethod={signInMethod}
-                    onLink={this.onDefaultLoginLink}
-                    onUnlink={this.onUnlink}
-                  />
-                ) : (
-                  <SocialLoginToggle
-                    onlyOneLeft={onlyOneLeft}
-                    isEnabled={isEnabled}
-                    signInMethod={signInMethod}
-                    onLink={this.onSocialLoginLink}
-                    onUnlink={this.onUnlink}
-                  />
-                )}
-              </li>
-            );
-          })}
-        </ul>
+          return (
+            <Grid columns={2} relaxed="very" stackable>
+              {signInMethod.id === 'password' ? (
+                <DefaultLoginToggle
+                  onlyOneLeft={onlyOneLeft}
+                  isEnabled={isEnabled}
+                  signInMethod={signInMethod}
+                  onLink={this.onDefaultLoginLink}
+                  onUnlink={this.onUnlink}
+                />
+              ) : (
+                <SocialLoginToggle
+                  onlyOneLeft={onlyOneLeft}
+                  isEnabled={isEnabled}
+                  signInMethod={signInMethod}
+                  onLink={this.onSocialLoginLink}
+                  onUnlink={this.onUnlink}
+                />
+              )}
+            </Grid>
+          );
+        })}
         {error && error.message}
-      </div>
+      </Segment>
     );
   }
 }
@@ -131,17 +139,18 @@ const SocialLoginToggle = ({
   onUnlink,
 }) =>
   isEnabled ? (
-    <button
+    <Button
       type="button"
+      color="google plus"
       onClick={() => onUnlink(signInMethod.id)}
       disabled={onlyOneLeft}
     >
-      Deactivate {signInMethod.id}
-    </button>
+      <Icon name="google" /> Deactivate {signInMethod.id}
+    </Button>
   ) : (
-    <button type="button" onClick={() => onLink(signInMethod.provider)}>
+    <Button type="button" onClick={() => onLink(signInMethod.provider)}>
       Link {signInMethod.id}
-    </button>
+    </Button>
   );
 
 class DefaultLoginToggle extends Component {
@@ -170,34 +179,39 @@ class DefaultLoginToggle extends Component {
     const isInvalid = passwordOne !== passwordTwo || passwordOne === '';
 
     return isEnabled ? (
-      <button
-        type="button"
-        onClick={() => onUnlink(signInMethod.id)}
-        disabled={onlyOneLeft}
-      >
-        Deactivate {signInMethod.id}
-      </button>
+      <Fragment>
+        <Button
+          type="button"
+          color="google plus"
+          onClick={() => onUnlink(signInMethod.id)}
+          disabled={onlyOneLeft}
+        >
+          <Icon name="google plus" /> Deactivate {signInMethod.id}
+        </Button>
+      </Fragment>
     ) : (
-      <form onSubmit={this.onSubmit}>
-        <input
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-          placeholder="New Password"
-        />
-        <input
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Confirm New Password"
-        />
-
-        <button disabled={isInvalid} type="submit">
-          Link {signInMethod.id}
-        </button>
-      </form>
+      <Form onSubmit={this.onSubmit}>
+        <Form.Group widths="equal" inline>
+          <label inline>Link Email</label>
+          <Form.Input
+            name="passwordOne"
+            value={passwordOne}
+            onChange={this.onChange}
+            type="password"
+            placeholder="New Password"
+          />
+          <Form.Input
+            name="passwordTwo"
+            value={passwordTwo}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Confirm New Password"
+          />
+          <Form.Button disabled={isInvalid} type="submit">
+            Link {signInMethod.id}
+          </Form.Button>
+        </Form.Group>
+      </Form>
     );
   }
 }

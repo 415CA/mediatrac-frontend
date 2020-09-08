@@ -5,6 +5,9 @@ import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
 
+import { Form, Input, Button, Label } from 'semantic-ui-react';
+
+
 const SignUpPage = () => (
   <div>
     <h1>SignUp</h1>
@@ -104,50 +107,50 @@ class SignUpFormBase extends Component {
       username === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
+      <Form onSubmit={this.onSubmit}>
+        <Input
           name="username"
           value={username}
           onChange={this.onChange}
           type="text"
           placeholder="Full Name"
         />
-        <input
+        <Input
           name="email"
           value={email}
           onChange={this.onChange}
           type="text"
           placeholder="Email Address"
         />
-        <input
+        <Input
           name="passwordOne"
           value={passwordOne}
           onChange={this.onChange}
           type="password"
           placeholder="Password"
         />
-        <input
+        <Input
           name="passwordTwo"
           value={passwordTwo}
           onChange={this.onChange}
           type="password"
           placeholder="Confirm Password"
         />
-        <label>
+        <Label>
           Admin:
-          <input
+          <Input
             name="isAdmin"
             type="checkbox"
             checked={isAdmin}
             onChange={this.onChangeCheckbox}
           />
-        </label>
-        <button disabled={isInvalid} type="submit">
+        </Label>
+        <Button disabled={isInvalid} type="submit">
           Sign Up
-        </button>
+        </Button>
 
         {error && <p>{error.message}</p>}
-      </form>
+      </Form>
     );
   }
 }

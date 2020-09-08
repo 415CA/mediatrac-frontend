@@ -27,7 +27,7 @@ import Slider from 'react-slick';
 
 const MovieDetails = (props) => {
   const tmdbID = props.match.params.id;
-
+  
   const [details, setDetails] = useState({});
   const [videos, setVideos] = useState({});
   const [recommendations, setRecommendations] = useState({});

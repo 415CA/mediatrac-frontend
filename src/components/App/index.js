@@ -22,7 +22,7 @@ import { Container } from 'semantic-ui-react';
 import MovieDetails from '../Content/Movies/MovieDetails';
 
 const App = () => (
-  <Container>
+  <Container >
     <Router>
       <div>
         <Navigation />
