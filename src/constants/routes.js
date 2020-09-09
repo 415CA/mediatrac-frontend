@@ -9,7 +9,7 @@ export const ADMIN_DETAILS = '/admin/:id';
 
 export const MOVIES = '/movies'
 export const MOVIE_DETAILS = '/movies/:id'
-export const FAVORITES = '/favorites'
+export const SEARCH = '/search'
 export const WATCHED = '/watched'
 export const UPCOMING = '/upcoming'
 export const FILMS = '/films/:id';

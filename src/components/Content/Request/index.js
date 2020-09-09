@@ -1,4 +1,5 @@
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
+const NYTIMES = process.env.REACT_APP_NYTIMES;
 
 const genre = {
   action: `/discover/movie?api_key=${API_KEY}&with_genres=28&append_to_response=videos,images&include_image_language=en`,
@@ -87,4 +88,12 @@ const explore = (tmdbID, pageNum = 1) => {
     '37': "Western",
   }
 
-export { genre, search, explore, tmdbGenres, API_KEY };
+  const nytreviews = (title) => {
+    return `?order=by-title&query=${title}&api-key=${process.env.REACT_APP_NYTIMES}`;
+  };
+
+  const album = (title) => {
+    return `q=${title}%20original%20motion%20picture&type=album`;
+  };
+
+export { genre, search, explore, tmdbGenres, API_KEY, NYTIMES, nytreviews, album };

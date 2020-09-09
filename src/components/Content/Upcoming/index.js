@@ -10,6 +10,7 @@ import {
 // import { useHistory } from 'react-router-dom';
 
 import Slider from 'react-slick';
+import { componentFromStreamWithConfig } from 'recompose';
 
 const Upcoming = () => {
   // const [feature, setFeature] = useState([]);

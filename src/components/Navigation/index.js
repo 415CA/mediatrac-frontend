@@ -5,9 +5,8 @@ import { AuthUserContext } from '../Session';
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
-import Search from '../Content/Search'
 
-import { Container, Menu} from 'semantic-ui-react';
+import { Container, Menu, Icon} from 'semantic-ui-react';
 
 const Navigation = () => (
   <AuthUserContext.Consumer>
@@ -18,34 +17,49 @@ const Navigation = () => (
 );
 
 const NavigationAuth = ({ authUser }) => (
-  <Menu secondary>
+  <Menu stackable secondary>
+    {/* <Menu pointing secondary vertical> */}
     <Container>
       <Menu.Item header>
-        <NavLink to={ROUTES.LANDING}>Landing</NavLink>
+        <NavLink to={ROUTES.LANDING}>
+          <Icon name="gamepad" />
+          Landing
+        </NavLink>
       </Menu.Item>
 
       <Menu.Item header>
-        <NavLink to={ROUTES.HOME}>Home</NavLink>
+        <NavLink to={ROUTES.HOME}>
+          <Icon name="home" />
+          Home
+        </NavLink>
       </Menu.Item>
 
       <Menu.Item header>
-        <NavLink to={ROUTES.ACCOUNT}>Account</NavLink>
+        <NavLink to={ROUTES.MOVIES}>
+          <Icon name="video" />
+          Movies
+        </NavLink>
       </Menu.Item>
 
       <Menu.Item header>
-        <NavLink to={ROUTES.MOVIES}>Movies</NavLink>
+        <NavLink to={ROUTES.SEARCH}>
+          <Icon name="search" />
+          Search
+        </NavLink>
       </Menu.Item>
 
       <Menu.Item header>
-        <NavLink to={ROUTES.FAVORITES}>Favorites</NavLink>
+        <NavLink to={ROUTES.WATCHED}>
+          <Icon name="television" />
+          Watched
+        </NavLink>
       </Menu.Item>
 
       <Menu.Item header>
-        <NavLink to={ROUTES.WATCHED}>Watched</NavLink>
-      </Menu.Item>
-
-      <Menu.Item header>
-        <NavLink to={ROUTES.UPCOMING}>Upcoming</NavLink>
+        <NavLink to={ROUTES.UPCOMING}>
+          <Icon name="star" />
+          Upcoming
+        </NavLink>
       </Menu.Item>
 
       {authUser.roles.includes(ROLES.ADMIN) && (
@@ -55,8 +69,11 @@ const NavigationAuth = ({ authUser }) => (
       )}
 
       <Menu.Menu position="right">
-        <Menu.Item>
-          <Search className="icon" icon="search" placeholder="Search..." />
+        <Menu.Item header>
+          <NavLink to={ROUTES.ACCOUNT}>
+            <Icon name="address card" />
+            Account
+          </NavLink>
         </Menu.Item>
         <Menu.Item as="a" name="signOut">
           <SignOutButton />
@@ -67,7 +84,7 @@ const NavigationAuth = ({ authUser }) => (
 );
 
 const NavigationNonAuth = () => (
-  <Menu>
+  <Menu stackable secondary>
     <Container>
       <Menu.Item header>
         <Link to={ROUTES.LANDING}>Landing</Link>

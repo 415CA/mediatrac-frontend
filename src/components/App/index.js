@@ -11,7 +11,7 @@ import AccountPage from '../Account';
 import AdminPage from '../Admin';
 
 import Movies from '../Content/Movies';
-import Favorites from '../Content/Favorites';
+import Search from '../Content/Search';
 import Watched from '../Content/Watched';
 import Upcoming from '../Content/Upcoming';
 import Film from '../Content/Films';
@@ -20,30 +20,36 @@ import Film from '../Content/Films';
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
 
-import { Container } from 'semantic-ui-react';
+import { Container, Grid } from 'semantic-ui-react';
 import MovieDetails from '../Content/Movies/MovieDetails';
 
 const App = () => (
-  <Container >
+  <Container>
     <Router>
       <div>
-        <Navigation />
-        <hr />
-        <Route exact path={ROUTES.LANDING} component={LandingPage} />
-        <Route exact path={ROUTES.SIGN_UP} component={SignUpPage} />
-        <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
-        <Route exact path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
-        <Route exact path={ROUTES.HOME} component={HomePage} />
-        <Route exact path={ROUTES.ACCOUNT} component={AccountPage} />
-        <Route exact path={ROUTES.ADMIN} component={AdminPage} />
 
-        <Route exact path={ROUTES.MOVIES} component={Movies} />
-        <Route exact path={ROUTES.MOVIE_DETAILS} component={MovieDetails} />
-        <Route exact path={ROUTES.FILMS} component={Film} />
-        <Route exact path={ROUTES.FILM_DETAILS} component={Film} />
-        <Route exact path={ROUTES.FAVORITES} component={Favorites} />
-        <Route exact path={ROUTES.WATCHED} component={Watched} />
-        <Route exact path={ROUTES.UPCOMING} component={Upcoming} />
+            <Navigation />
+
+            <Route exact path={ROUTES.LANDING} component={LandingPage} />
+            <Route exact path={ROUTES.SIGN_UP} component={SignUpPage} />
+            <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
+            <Route
+              exact
+              path={ROUTES.PASSWORD_FORGET}
+              component={PasswordForgetPage}
+            />
+            <Route exact path={ROUTES.HOME} component={HomePage} />
+            <Route exact path={ROUTES.ACCOUNT} component={AccountPage} />
+            <Route exact path={ROUTES.ADMIN} component={AdminPage} />
+
+            <Route exact path={ROUTES.MOVIES} component={Movies} />
+            <Route exact path={ROUTES.MOVIE_DETAILS} component={MovieDetails} />
+            <Route exact path={ROUTES.FILMS} component={Film} />
+            <Route exact path={ROUTES.FILM_DETAILS} component={Film} />
+            <Route exact path={ROUTES.SEARCH} component={Search} />
+            <Route exact path={ROUTES.WATCHED} component={Watched} />
+            <Route exact path={ROUTES.UPCOMING} component={Upcoming} />
+
       </div>
     </Router>
   </Container>

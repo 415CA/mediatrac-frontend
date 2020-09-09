@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
-import { axios, movies, image} from '../../Content/Axios';
-import { explore } from '../../Content/Request';
+import { axios, movies, image, nytimes, spotify } from '../../Content/Axios';
+import { explore, nytreviews, album } from '../../Content/Request';
 import {
   Grid,
   Image,
@@ -13,14 +13,7 @@ import {
   List,
   Divider,
 } from 'semantic-ui-react';
-// import Movies from '../Movies';
-// import { render } from '@testing-library/react';
-// import { renderComponent } from 'recompose';
-// import { Link } from 'react-router-dom';
-// import { SocialIcon } from 'react-social-icons';
-
 import Slider from 'react-slick';
-import FilmDetailsMod from '../Films/FilmDetailsMod';
 
 const MovieDetails = (props) => {
   const tmdbID = props.match.params.id;
@@ -32,34 +25,70 @@ const MovieDetails = (props) => {
   const [reviews, setReviews] = useState({});
   const [credits, setCredits] = useState({});
   const [socialMedia, setSocialMedia] = useState({});
+  const [nyTimesReview, setNYTimesReview] = useState({});
 
-    useEffect(() => {
-      async function details() {
-        const detailObject = await axios.all(
-          [
-            movies.get(explore(tmdbID).details),
-            movies.get(explore(tmdbID).videos),
-            movies.get(explore(tmdbID).recommendations),
-            movies.get(explore(tmdbID).similarMovies),
-            movies.get(explore(tmdbID).reviews),
-            movies.get(explore(tmdbID).credits),
-            movies.get(explore(tmdbID).socialMedia),
-          ])
-          .then(
-            axios.spread((...responses) => {
-              setDetails(responses[0].data)
-              setVideos(responses[1].data)
-              setRecommendations(responses[2].data)
-              setSimilarMovies(responses[3].data)
-              setReviews(responses[4].data)
-              setCredits(responses[5].data)
-              setSocialMedia(responses[6].data)
-            })
-          );
-        return detailObject
-      }
-        details();
-    }, []);
+  useEffect(() => {
+    async function details() {
+      const detailObject = await axios.all(
+        [
+          movies.get(explore(tmdbID).details),
+          movies.get(explore(tmdbID).videos),
+          movies.get(explore(tmdbID).recommendations),
+          movies.get(explore(tmdbID).similarMovies),
+          movies.get(explore(tmdbID).reviews),
+          movies.get(explore(tmdbID).credits),
+          movies.get(explore(tmdbID).socialMedia),
+        ])
+        .then(
+          axios.spread((...responses) => {
+            setDetails(responses[0].data)
+            setVideos(responses[1].data)
+            setRecommendations(responses[2].data)
+            setSimilarMovies(responses[3].data)
+            setReviews(responses[4].data)
+            setCredits(responses[5].data)
+            setSocialMedia(responses[6].data)
+            nytimes
+              .get(nytreviews(responses[0].data.title))
+              .then((response) => {
+                setNYTimesReview(
+                  filterReview(responses[0].data.title, response.data.results)
+                );
+              });
+            spotify.get(album(responses[0].data.title))
+            .then(response => console.log(response));
+          })
+        );
+      return detailObject
+    }
+      details();
+  }, []);
+
+  const filterReview = (title, reviews) => {
+    return reviews.filter((review) => review.display_title === title)[0];
+  }
+
+  const displayNYT = (nyTimesReview) => {
+    if (nyTimesReview) {
+      return (
+        <Fragment key={nyTimesReview.headline}>
+          <Header as="h3" dividing>
+            NY Times Review:
+          </Header>
+          <Comment key={nyTimesReview.headline}>
+            <Comment.Content>
+              <Comment.Author>{nyTimesReview.byline}</Comment.Author>
+              <Comment.Text>
+                <b>{nyTimesReview.headline}</b>
+                <br></br>
+                {nyTimesReview.summary_short}
+              </Comment.Text>
+            </Comment.Content>
+          </Comment>
+        </Fragment>
+      );
+    }
+  }
 
     const truncate = (description, n) => {
       return description?.length > n
@@ -67,13 +96,22 @@ const MovieDetails = (props) => {
         : description;
     };
 
+    const poster = (movie) => `${image}${movie.poster_path}`;
+    const castPicture = (actor) => `${image}${actor.profile_path}`;
+    const crewPicture = (crew) => `${image}${crew.profile_path}`;
+
+    const selectImage = (picture) => {
+      return picture ? picture : 'https://flixdetective.com/web/images/poster-placeholder.png'; 
+    }
+
     let similarToRender;
     if (similarMovies.results) {
       similarToRender = similarMovies.results.map((movie) => {
         return (
           <Image
             key={movie.id}
-            src={`${image}${movie.poster_path}`}
+            // src={`${image}${movie.poster_path}`}
+            src={selectImage(poster(movie))}
             as="a"
             size="small"
             href={`/movies/${movie.id}`}
@@ -101,7 +139,24 @@ const MovieDetails = (props) => {
       });
     }
 
-    console.log("Recomendations", recommendations.results);
+    const recommendationsSlider = (recommendations) => {
+      let recommendationsToRender
+  
+      if (recommendations.results) {
+        recommendationsToRender = recommendations.results.map((movie) => {
+          return (
+            <Image
+              key={movie.id}
+              src={`${image}${movie.poster_path}`}
+              as="a"
+              size="small"
+              href={`/movies/${movie.id}`}
+            />
+          );
+        });
+      }
+      return recommendationsToRender;
+    };
 
     let reviewToRender;
     if (reviews.results) {
@@ -138,10 +193,15 @@ const MovieDetails = (props) => {
     if (credits.crew) {
       crewToRender = credits.crew.slice(0, 5).map((crew) => {
         return (
-          <div>
+          <div key={crew.id + crew.job}>
             <Card
               key={crew.id + crew.job}
-              image={`${image}${crew.profile_path}`}
+              // image={`${image}${crew.profile_path}`}
+              image={
+                crew.profile_path
+                  ? `${image}${crew.profile_path}`
+                  : 'https://flixdetective.com/web/images/poster-placeholder.png'
+              }
               header={crew.name}
               description={crew.job}
               raised={false}
@@ -154,7 +214,7 @@ const MovieDetails = (props) => {
     const socialMediaToRender = () => {
       if (socialMedia) {
         return (
-          <List compact borderless horizontal>
+          <List horizontal>
             <List.Item name="homepage" href={details.homepage}>
               <Icon name="linkify" circular />
               {/* Homepage */}
@@ -192,7 +252,7 @@ const MovieDetails = (props) => {
       if (details) {
 
         return (
-          <List compact borderless horizontal>
+          <List horizontal>
             <List.Item>
               <List.Content>
                 <List.Header>Release Date</List.Header>
@@ -258,7 +318,7 @@ const MovieDetails = (props) => {
               width: 1024,
               height: 320,
               display: 'inline-block',
-              opacity: 0.5,
+              // opacity: 0.5,
               backgroundImage: `url(${image}${details.backdrop_path})`,
               backgroundSize: 'cover',
               // fontSize: mobile ? '2em' : '4em',
@@ -272,8 +332,6 @@ const MovieDetails = (props) => {
         </Container>
       );
     }
-
-    console.log(reviews.results);
 
     return (
       <div>
@@ -289,7 +347,7 @@ const MovieDetails = (props) => {
             </Grid.Column>
             <Grid.Column width={10}>
               <h1>{details.title}</h1>
-              <List borderless>
+              <List>
                 <List.Item>{detailsToRender()}</List.Item>
                 <List.Item>{socialMediaToRender()}</List.Item>
                 <Divider />
@@ -302,11 +360,11 @@ const MovieDetails = (props) => {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-
+        {displayNYT(nyTimesReview)}
         <Header as="h3" dividing>
-          Similar Movies
+          User Reviews
         </Header>
-        <Slider {...sliderSettings}>{similarToRender}</Slider>
+        <Slider {...commentSliderSettings}>{reviewToRender}</Slider>
         <Header as="h3" dividing>
           Cast
         </Header>
@@ -316,13 +374,19 @@ const MovieDetails = (props) => {
         </Header>
         <Slider {...sliderSettings}>{crewToRender}</Slider>
         <Header as="h3" dividing>
+          Similar Movies
+        </Header>
+        <Slider {...sliderSettings}>{similarToRender}</Slider>
+        <Header as="h3" dividing>
+          Recommended Movies
+        </Header>
+        <Slider {...sliderSettings}>
+          {recommendationsSlider(recommendations)}
+        </Slider>
+        <Header as="h3" dividing>
           Videos
         </Header>
         <Slider {...sliderSettings}>{videoToRender}</Slider>
-        <Header as="h3" dividing>
-          Comments
-        </Header>
-        <Slider {...commentSliderSettings}>{reviewToRender}</Slider>
       </div>
     );
 
