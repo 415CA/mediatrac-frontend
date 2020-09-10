@@ -71,4 +71,4 @@ const Movies = () => {
   return <Card.Group itemsPerRow={5}>{displayRow}</Card.Group>;
 };
 
-export default Movies;
+export default test;

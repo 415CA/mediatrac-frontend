@@ -12,7 +12,8 @@ import {
   Icon,
   List,
   Divider,
-  Label
+  Modal, 
+  Button
 } from 'semantic-ui-react';
 
 import WatchedButton from '../Watched'
@@ -138,18 +139,47 @@ const MovieDetails = (props) => {
     }
 
     
+    // let videoToRender; 
+    // if (videos.results) {
+    //   videoToRender = videos.results.slice(0, 10).map((movie) => {
+    //     return (
+    //       <Fragment key={movie.key}>
+    //         <Header as='h5' >{truncate(movie.name, 30)}</Header>
+    //         <Embed
+    //           id={movie.key}
+    //           placeholder={`${image}${details.backdrop_path}`}
+    //           source="youtube"
+    //           size="medium"
+    //           hd={true}
+    //         />
+    //       </Fragment>
+    //     );
+    //   });
+    // }
+
+    const [open, setOpen] = React.useState(false);
+
     let videoToRender; 
     if (videos.results) {
       videoToRender = videos.results.slice(0, 10).map((movie) => {
         return (
           <Fragment key={movie.key}>
-            <Header as='h5' >{truncate(movie.name, 30)}</Header>
-            <Embed
-              id={movie.key}
-              placeholder={`${image}${details.backdrop_path}`}
-              source="youtube"
-              size="medium"
-              hd={true}
+            <Header as="h5">{truncate(movie.name, 30)}</Header>
+            <Modal
+              trigger={
+                <Image src={`${image}${details.backdrop_path}`} size="medium" />
+              }
+              header={truncate(movie.name, 30)}
+              content={
+                <Embed
+                  id={movie.key}
+                  placeholder={`${image}${details.backdrop_path}`}
+                  source="youtube"
+                  size="medium"
+                  hd={true}
+                  icon="video play"
+                />
+              }
             />
           </Fragment>
         );
@@ -236,27 +266,45 @@ const MovieDetails = (props) => {
       if (socialMedia) {
         return (
           <List horizontal>
-            <List.Item name="homepage" href={details.homepage}>
+            <List.Item
+              name="homepage"
+              onClick={() => window.open(details.homepage, '_blank')}
+            >
               <Icon name="linkify" circular />
             </List.Item>
 
             <List.Item
               name="facebook"
-              href={`http://facebook.com/${socialMedia.facebook_id}`}
+              onClick={() =>
+                window.open(
+                  `http://facebook.com/${socialMedia.facebook_id}`,
+                  '_blank'
+                )
+              }
             >
               <Icon name="facebook" circular />
             </List.Item>
 
             <List.Item
               name="instagram"
-              href={`http://instagram.com/${socialMedia.instagram_id}`}
+              onClick={() =>
+                window.open(
+                  `http://instagram.com/${socialMedia.instagram_id}`,
+                  '_blank'
+                )
+              }
             >
               <Icon name="instagram" circular />
             </List.Item>
 
             <List.Item
               name="twitter"
-              href={`http://twitter.com/${socialMedia.twitter_id}`}
+              onClick={() =>
+                window.open(
+                  `http://twitter.com/${socialMedia.twitter_id}`,
+                  '_blank'
+                )
+              }
             >
               <Icon name="twitter" circular />
             </List.Item>
@@ -304,6 +352,34 @@ const MovieDetails = (props) => {
       centerPadding: "60px",
       slidesToShow: 5,
       swipeToSlide: true,
+      dots: true,
+            responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            initialSlide: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ],
+
       afterChange: function(index) {
         console.log(
           `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
@@ -319,6 +395,8 @@ const MovieDetails = (props) => {
       slidesToShow: 1,
       swipeToSlide: true,
       adaptiveHeight: true,
+      dots: true,
+
       afterChange: function (index) {
         console.log(
           `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
@@ -328,7 +406,7 @@ const MovieDetails = (props) => {
 
     const backgroundHeader = () => {
       return (
-        <Container>
+        <Container fluid>
           <Header
             as="h1"
             inverted
@@ -350,8 +428,6 @@ const MovieDetails = (props) => {
         </Container>
       );
     }
-
-    console.log(details)
 
     return (
       <div>

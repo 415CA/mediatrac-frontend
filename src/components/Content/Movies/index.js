@@ -1,29 +1,14 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { movies, image, rails } from '../../Content/Axios';
-import { genre } from '../../Content/Request';
-// import { Route } from 'react-router-dom';
-
-import DeleteButton from '.';
+import { image, rails } from '../../Content/Axios';
 
 import { Card, Header, Image, Button } from 'semantic-ui-react';
 
 const Movies = () => {
   const [feature, setFeature] = useState([]);
 
-  // useEffect(() => {
-  //   async function getMovies() {
-  //     const request = await movies.get(genre.trending).then((display) => {
-  //       setFeature(display.data.results);
-  //     });
-  //     return request;
-  //   }
-  //   getMovies();
-  // }, []);
-
   useEffect(() => {
     async function getMovies() {
       const request = await rails.get('/movies').then((display) => {
-        // setFeature(display.data.results);
         setFeature(display.data);
       });
       return request;
@@ -36,7 +21,6 @@ const Movies = () => {
       ? description.substr(0, n - 1) + '...'
       : description;
   };
-
 
   const deleteCard = (movie) => {
     rails.delete(`/movies/${movie.id}`)
@@ -55,8 +39,13 @@ const Movies = () => {
     let featureCards = feature.map((movie) => {
       return (
         <>
-          <Card key={movie.tmdb_id} href={`/movies/${movie.tmdb_id}`}>
-            <Image src={`${image}${movie.poster_path}`} wrapped ui={false} />
+          <Card key={movie.tmdb_id}>
+            <Image
+              src={`${image}${movie.poster_path}`}
+              wrapped
+              ui={false}
+              href={`/movies/${movie.tmdb_id}`}
+            />
             <Card.Content>
               <Card.Header>{movie.original_title}</Card.Header>
               <Card.Meta>

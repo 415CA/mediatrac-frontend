@@ -23,7 +23,7 @@ const NavigationAuth = ({ authUser }) => (
       <Menu.Item header>
         <NavLink to={ROUTES.LANDING}>
           <Icon name="television" />
-          Landing
+          MediaTrac
         </NavLink>
       </Menu.Item>
 

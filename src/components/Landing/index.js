@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { movies, image, axios } from '../Content/Axios';
 import { genre } from '../Content/Request';
 
-import { Image, Header, Container, Button, Icon } from 'semantic-ui-react';
+import { Image, Header} from 'semantic-ui-react';
 import Slider from 'react-slick';
 
 
@@ -43,7 +43,7 @@ const Landing = () => {
 
   useEffect(() => {
     const getBanner = () => {
-      movies.get(genre.trending).then((discover) => {
+      movies.get(genre.nowPlaying).then((discover) => {
         setFeature({
           banner:
             discover.data.results[
@@ -67,31 +67,13 @@ const Landing = () => {
 
   const displayBanner = (banner) => {
     return (
-      // <Container>
-      //   <Header
-      //     as="h1"
-      //     inverted
-      //     style={{
-      //       width: 1024,
-      //       height: 700,
-      //       display: 'inline-block',
-      //       // opacity: 0.5,
-      //       backgroundImage: `url(${image}${banner.backdrop_path})`,
-      //       backgroundSize: 'cover',
-      //       fontSize: '4em',
-      //       fontWeight: 'normal',
-      //       marginBottom: 0,
-      //       marginTop: '3em',
-      //     }}
-      //   >
-      //     Hello World
-      //   </Header>
-      // </Container>
-      <header
+      <Header
         className="banner"
         style={{
           backgroundSize: 'cover',
-          backgroundImage: `url(${image}${banner.backdrop_path})`,
+          backgroundImage:
+            banner.backdrop_path ? `url(${image}${banner.backdrop_path})` :
+            `url(${image}${banner.poster_path})`,
           backgroundPosition: 'center center',
         }}
       >
@@ -100,18 +82,19 @@ const Landing = () => {
             {banner?.title || banner?.name || banner?.original_name}
           </h1>
 
-          <div className="banner__buttons">
-            <button className="banner__button">Add to Favorite</button>
-            <button className="banner__button">Add to Watched</button>
-          </div>
-
           <h1 className="banner__description">
             {truncate(banner?.overview, 150)}
           </h1>
+
+          <div className="banner__buttons">
+            <a href={`/movies/${banner.id}`}>
+              <button className="banner__button">View Details</button>
+            </a>
+          </div>
         </div>
 
         <div className="banner--fadeBottom" />
-      </header>
+      </Header>
     );
   };
 
