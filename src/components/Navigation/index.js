@@ -87,7 +87,10 @@ const NavigationNonAuth = () => (
   <Menu stackable secondary>
     <Container>
       <Menu.Item header>
-        <Link to={ROUTES.LANDING}>Landing</Link>
+        <NavLink to={ROUTES.LANDING}>
+          <Icon name="television" />
+          MediaTrac
+        </NavLink>
       </Menu.Item>
 
       <Menu.Item header>

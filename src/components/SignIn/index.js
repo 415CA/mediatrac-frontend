@@ -13,22 +13,31 @@ import {
   Grid,
   Header,
   Segment,
+  Divider,
+  Icon
 } from 'semantic-ui-react';
 
 const SignInPage = () => (
-  <Grid centered columns={2}>
-    <Grid.Column>
-      <Header as="h2" textAlign="center">
-        SignIn
-      </Header>
-      <Segment textAlign="center">
-        <SignInForm />
-        <SignInGoogle />
-        <PasswordForgetLink />
-        <SignUpLink />
-      </Segment>
-    </Grid.Column>
-  </Grid>
+  <div>
+    <Header as="h2" textAlign="center">
+      SignIn
+    </Header>
+    <Segment placeholder centered size="tiny">
+      <Grid columns={2} relaxed="very" stackable textAlign="center">
+        <Grid.Column>
+          <SignInForm />
+          <PasswordForgetLink />
+          <SignUpLink />
+        </Grid.Column>
+
+        <Grid.Column verticalAlign="middle">
+          <SignInGoogle />
+        </Grid.Column>
+      </Grid>
+
+      <Divider vertical>Or</Divider>
+    </Segment>
+  </div>
 );
 
 const INITIAL_STATE = {
@@ -154,7 +163,10 @@ class SignInGoogleBase extends Component {
 
     return (
       <Form onSubmit={this.onSubmit}>
-        <Button type="submit">Sign In with Google</Button>
+        <Button type="submit" color="google plus">
+          <Icon name="google" />
+          Sign In with Google
+        </Button>
         {error && <p>{error.message}</p>}
       </Form>
     );

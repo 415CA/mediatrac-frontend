@@ -15,7 +15,8 @@ import {
   Button,
   Grid,
   Segment,
-  Icon
+  Icon, 
+  Divider
 } from 'semantic-ui-react';
 
 const SIGN_IN_METHODS = [
@@ -138,7 +139,8 @@ const SocialLoginToggle = ({
   isEnabled ? (
     <Button
       type="button"
-      color="google plus"
+      basic
+      color="red"
       onClick={() => onUnlink(signInMethod.id)}
       disabled={onlyOneLeft}
     >
@@ -179,11 +181,12 @@ class DefaultLoginToggle extends Component {
       <Fragment>
         <Button
           type="button"
-          color="google plus"
+          basic
+          color="red"
           onClick={() => onUnlink(signInMethod.id)}
           disabled={onlyOneLeft}
         >
-          <Icon name="google plus" /> Deactivate {signInMethod.id}
+          <Icon name="mail" /> Deactivate {signInMethod.id}
         </Button>
       </Fragment>
     ) : (

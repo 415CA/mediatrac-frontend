@@ -5,12 +5,12 @@ import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
 
-import { Form, Input, Button, Label } from 'semantic-ui-react';
+import { Form, Segment, Header } from 'semantic-ui-react';
 
 
 const SignUpPage = () => (
   <div>
-    <h1>SignUp</h1>
+    <Header size="huge" textAlign="center">SignUp</Header>
     <SignUpForm />
   </div>
 );
@@ -107,50 +107,60 @@ class SignUpFormBase extends Component {
       username === '';
 
     return (
-      <Form onSubmit={this.onSubmit}>
-        <Input
-          name="username"
-          value={username}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Full Name"
-        />
-        <Input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        <Input
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        />
-        <Input
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Confirm Password"
-        />
-        <Label>
-          Admin:
-          <Input
-            name="isAdmin"
-            type="checkbox"
-            checked={isAdmin}
-            onChange={this.onChangeCheckbox}
+      <Segment centered size="tiny" textAlign="center" >
+      <Form onSubmit={this.onSubmit} size={'large'} key={'large'}>
+        <Form.Group widths="equal">
+          <Form.Input
+            name="username"
+            value={username}
+            onChange={this.onChange}
+            type="text"
+            placeholder="Full Name"
+            label="Full Name"
+            size="small"
           />
-        </Label>
-        <Button disabled={isInvalid} type="submit">
+          <Form.Input
+            name="email"
+            value={email}
+            onChange={this.onChange}
+            type="text"
+            label="Email Address"
+            placeholder="Email Address"
+            size="small"
+          />
+        </Form.Group>
+        <Form.Group widths="equal">
+          <Form.Input
+            name="passwordOne"
+            value={passwordOne}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Password"
+            label="Password"
+            size="small"
+          />
+          <Form.Input
+            name="passwordTwo"
+            value={passwordTwo}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Confirm Password"
+            label="Confirm Password"
+            size="small"
+          />
+        </Form.Group>
+        <Form.Checkbox
+          name="isAdmin"
+          label="Admin"
+          checked={isAdmin}
+          onChange={this.onChangeCheckbox}
+        />
+        <Form.Button disabled={isInvalid} type="submit">
           Sign Up
-        </Button>
-
+        </Form.Button>
         {error && <p>{error.message}</p>}
       </Form>
+      </Segment>
     );
   }
 }
