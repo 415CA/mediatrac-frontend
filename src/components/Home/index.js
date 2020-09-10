@@ -7,13 +7,14 @@ import { List } from 'semantic-ui-react';
 import HomepageList from '.'
 import { rails } from '../Content/Axios';
 
+import Movies from '../Content/Movies'
+
 class HomePage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       users: null,
-      movies: [],
     };
   }
 
@@ -40,7 +41,7 @@ class HomePage extends Component {
     return (
       <div>
         <h1>Home Page</h1>
-        {/* <HomepageList movies={this.state.movies} /> */}
+        <Movies />
       </div>
     );
   }

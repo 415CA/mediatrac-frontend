@@ -37,33 +37,6 @@ const Movies = () => {
       : description;
   };
 
-const movieDetails = (movie) => {
-  localStorage.setItem('selectedMovie', movie);
-};
-
-  // const displayRow = feature.map((movie) => {
-  //   return (
-  //     <Card
-  //       key={movie.id}
-  //       image={`${image}${movie.poster_path}`}
-  //       header={movie.title}
-  //       meta={`Rating: ${movie.vote_average}`}
-  //       description={truncate(movie.overview, 75)}
-  //       raised={true}
-  //       href={`/movies/${movie.id}`}
-  //       movie={movie}
-  //       onClick={movieDetails(movie.id)}
-  //     />
-  //   );
-  // });
-
-  // const deleteRequest = (movie) => {
-  //   rails
-  //   .delete(`/movies/${movie.id}`)
-  //   .then((response) => {
-  //     debugger
-  //     displayRow(response)});
-  // };
 
   const deleteCard = (movie) => {
     rails.delete(`/movies/${movie.id}`)
@@ -82,18 +55,7 @@ const movieDetails = (movie) => {
     let featureCards = feature.map((movie) => {
       return (
         <>
-          {/* <Card
-            key={movie.tmdb_id}
-            image={`${image}${movie.poster_path}`}
-            header={movie.original_title}
-            description={truncate(movie.overview, 75)}
-            raised={true}
-            href={`/movies/${movie.tmdb_id}`}
-            movie={movie}
-            // onClick={movieDetails(movie.tmdb_id)}
-          /> */}
-
-          <Card key={movie.tmdb_id}>
+          <Card key={movie.tmdb_id} href={`/movies/${movie.tmdb_id}`}>
             <Image src={`${image}${movie.poster_path}`} wrapped ui={false} />
             <Card.Content>
               <Card.Header>{movie.original_title}</Card.Header>
@@ -102,12 +64,9 @@ const movieDetails = (movie) => {
               </Card.Meta>
             </Card.Content>
             <Card.Content extra>
-              {/* <Form> */}
-                <Button basic color="red" onClick={() => deleteCard(movie)}>
-                  Remove
-                </Button>
-              {/* </Form> */}
-              {/* <DeleteButton movie={movie} deleteRequest={deleteRequest()} /> */}
+              <Button basic color="red" onClick={() => deleteCard(movie)}>
+                Remove
+              </Button>
             </Card.Content>
           </Card>
         </>

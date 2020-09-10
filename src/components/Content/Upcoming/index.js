@@ -209,6 +209,10 @@ const Upcoming = () => {
   return (
     <div>
       <Header as="h3" dividing>
+        Trending
+      </Header>
+      {categorySliders(posters(trending))}
+      <Header as="h3" dividing>
         Action
       </Header>
       {categorySliders(posters(action))}
@@ -252,10 +256,7 @@ const Upcoming = () => {
         Thriller
       </Header>
       {categorySliders(posters(thriller))}
-      <Header as="h3" dividing>
-        Trending
-      </Header>
-      {categorySliders(posters(trending))}
+
       {/* {categorySliders(posters(popular))}
       {categorySliders(posters(discover))}
       {categorySliders(posters(upcoming))}

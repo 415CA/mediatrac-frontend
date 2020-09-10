@@ -15,10 +15,10 @@ const genre = {
   thriller: `/discover/movie?api_key=${API_KEY}&with_genres=53&append_to_response=videos,images&include_image_language=en`,
 
   trending: `/trending/movie/week?api_key=${API_KEY}&append_to_response=videos,images&include_image_language=en`,
-  popular: `/discover/movie/week?api_key=${API_KEY}sort_by=popularity.desc&append_to_response=videos,images&include_image_language=en`,
+  popular: `/movie/popular?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=true`,
   discover: `/discover/movie?api_key=${API_KEY}&append_to_response=videos,images&include_image_language=en`,
-  upcoming: `/discover/movie/upcoming?api_key=${API_KEY}&language=en-US&append_to_response=videos,images&include_image_language=en`,
-  nowPlaying: `/discover/movie/now_playing?api_key=${API_KEY}&language=en-US&append_to_response=videos,images&include_image_language=en`,
+  upcoming: `/movie/upcoming?api_key=${API_KEY}&language=en-US`,
+  nowPlaying: `/movie/now_playing?api_key=${API_KEY}&language=en-US`,
 };
 
 const search = (query, pageNum = 1) => {

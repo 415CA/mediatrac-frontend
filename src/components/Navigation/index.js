@@ -22,7 +22,7 @@ const NavigationAuth = ({ authUser }) => (
     <Container>
       <Menu.Item header>
         <NavLink to={ROUTES.LANDING}>
-          <Icon name="gamepad" />
+          <Icon name="television" />
           Landing
         </NavLink>
       </Menu.Item>
@@ -34,10 +34,17 @@ const NavigationAuth = ({ authUser }) => (
         </NavLink>
       </Menu.Item>
 
-      <Menu.Item header>
+      {/* <Menu.Item header>
         <NavLink to={ROUTES.MOVIES}>
           <Icon name="video" />
           Movies
+        </NavLink>
+      </Menu.Item> */}
+
+      <Menu.Item header>
+        <NavLink to={ROUTES.UPCOMING}>
+          <Icon name="star" />
+          New Releases
         </NavLink>
       </Menu.Item>
 
@@ -48,19 +55,12 @@ const NavigationAuth = ({ authUser }) => (
         </NavLink>
       </Menu.Item>
 
-      <Menu.Item header>
+      {/* <Menu.Item header>
         <NavLink to={ROUTES.WATCHED}>
           <Icon name="television" />
           Watched
         </NavLink>
-      </Menu.Item>
-
-      <Menu.Item header>
-        <NavLink to={ROUTES.UPCOMING}>
-          <Icon name="star" />
-          Upcoming
-        </NavLink>
-      </Menu.Item>
+      </Menu.Item> */}
 
       {authUser.roles.includes(ROLES.ADMIN) && (
         <Menu.Item header>
