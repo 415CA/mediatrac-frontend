@@ -17,7 +17,7 @@ const image = 'https://image.tmdb.org/t/p/original';
 const rails = axios.create({
   baseURL: 'http://localhost:3000',
 });
-rails.defaults.headers.common['Content-type'] = 'Application/json';
+// rails.defaults.headers.common['Content-type'] = 'Application/json';
 
 const nytimes = axios.create({
   baseURL: 'https://api.nytimes.com/svc/movies/v2/reviews/search.json',

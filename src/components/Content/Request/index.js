@@ -89,7 +89,7 @@ const explore = (tmdbID, pageNum = 1) => {
   }
 
   const nytreviews = (title) => {
-    return `?order=by-title&query=${title}&api-key=${process.env.REACT_APP_NYTIMES}`;
+    return `?order=by-title&query=${title}&api-key=CDKlAZCAyOYClxv6Zmavk4ujwGAWenZk`;
   };
 
   const album = (title) => {

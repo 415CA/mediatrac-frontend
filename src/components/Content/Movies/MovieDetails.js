@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
-import { axios, movies, image, nytimes, spotify } from '../../Content/Axios';
-import { explore, nytreviews, album } from '../../Content/Request';
+import { axios, movies, image, nytimes } from '../../Content/Axios';
+import { explore, nytreviews } from '../../Content/Request';
 import {
   Grid,
   Image,
@@ -12,7 +12,10 @@ import {
   Icon,
   List,
   Divider,
+  Label
 } from 'semantic-ui-react';
+
+import WatchedButton from '../Watched'
 import Slider from 'react-slick';
 
 const MovieDetails = (props) => {
@@ -55,13 +58,27 @@ const MovieDetails = (props) => {
                   filterReview(responses[0].data.title, response.data.results)
                 );
               });
-            spotify.get(album(responses[0].data.title))
-            .then(response => console.log(response));
+            // spotify.get(album(responses[0].data.title))
+            // .then(response => console.log(response));
           })
         );
       return detailObject
     }
       details();
+  }, []);
+
+  useEffect(() => {
+    async function getNYT() {
+      const request = await nytimes
+        .get(nytreviews(details.title))
+        .then((response) => {
+          setNYTimesReview(
+            filterReview(details.title, response.data.results)
+          );
+        });
+      return request;
+    }
+    getNYT();
   }, []);
 
   const filterReview = (title, reviews) => {
@@ -73,7 +90,7 @@ const MovieDetails = (props) => {
       return (
         <Fragment key={nyTimesReview.headline}>
           <Header as="h3" dividing>
-            NY Times Review:
+            NY Times Review
           </Header>
           <Comment key={nyTimesReview.headline}>
             <Comment.Content>
@@ -176,13 +193,17 @@ const MovieDetails = (props) => {
     
     let castToRender; 
     if (credits.cast) {
-      castToRender = credits.cast.slice(0, 5).map((actor) => {
+      castToRender = credits.cast.slice(0, 10).map((actor) => {
         return (
           <Card
             key={actor.id}
-            image={`${image}${actor.profile_path}`}
+            image={
+              actor.profile_path
+                ? `${image}${actor.profile_path}`
+                : 'https://flixdetective.com/web/images/poster-placeholder.png'
+            }
             header={actor.name}
-            description={ truncate(actor.character, 30) }
+            description={truncate(actor.character, 30)}
             raised={true}
           />
         );
@@ -191,7 +212,7 @@ const MovieDetails = (props) => {
 
     let crewToRender; 
     if (credits.crew) {
-      crewToRender = credits.crew.slice(0, 5).map((crew) => {
+      crewToRender = credits.crew.slice(0, 10).map((crew) => {
         return (
           <div key={crew.id + crew.job}>
             <Card
@@ -217,7 +238,6 @@ const MovieDetails = (props) => {
           <List horizontal>
             <List.Item name="homepage" href={details.homepage}>
               <Icon name="linkify" circular />
-              {/* Homepage */}
             </List.Item>
 
             <List.Item
@@ -225,7 +245,6 @@ const MovieDetails = (props) => {
               href={`http://facebook.com/${socialMedia.facebook_id}`}
             >
               <Icon name="facebook" circular />
-              {/* Facebook */}
             </List.Item>
 
             <List.Item
@@ -233,7 +252,6 @@ const MovieDetails = (props) => {
               href={`http://instagram.com/${socialMedia.instagram_id}`}
             >
               <Icon name="instagram" circular />
-              {/* Instagram */}
             </List.Item>
 
             <List.Item
@@ -241,8 +259,8 @@ const MovieDetails = (props) => {
               href={`http://twitter.com/${socialMedia.twitter_id}`}
             >
               <Icon name="twitter" circular />
-              {/* Twitter */}
             </List.Item>
+            {WatchedButton(details)}
           </List>
         );
       }
@@ -333,10 +351,12 @@ const MovieDetails = (props) => {
       );
     }
 
+    console.log(details)
+
     return (
       <div>
         {backgroundHeader()}
-        <Grid celled="internally" stackable columns={2}>
+        <Grid celled="internally" stackable={true} columns={2}>
           <Grid.Row>
             <Grid.Column width={3}>
               <Image

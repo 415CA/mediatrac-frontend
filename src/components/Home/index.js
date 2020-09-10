@@ -3,6 +3,9 @@ import { compose } from 'recompose';
 
 import { withAuthorization, withEmailVerification } from '../Session';
 import { withFirebase } from '../Firebase';
+import { List } from 'semantic-ui-react';
+import HomepageList from '.'
+import { rails } from '../Content/Axios';
 
 class HomePage extends Component {
   constructor(props) {
@@ -20,6 +23,12 @@ class HomePage extends Component {
         users: snapshot.val(),
       });
     });
+
+    rails.get('/movies')
+    .then(response => {
+      console.log(response); 
+      this.state.movies = response.data; 
+    })
   }
 
   componentWillUnmount() {
@@ -31,6 +40,7 @@ class HomePage extends Component {
     return (
       <div>
         <h1>Home Page</h1>
+        {/* <HomepageList movies={this.state.movies} /> */}
       </div>
     );
   }

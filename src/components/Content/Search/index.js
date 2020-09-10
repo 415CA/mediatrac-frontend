@@ -41,16 +41,20 @@ const Search = () => {
         return (
           <Card
             key={movie.id}
-            image={`${image}${movie.poster_path}`}
+            image={
+              movie.poster_path
+                ? `${image}${movie.poster_path}`
+                : 'https://flixdetective.com/web/images/poster-placeholder.png'
+            }
             header={movie.title}
             meta={`Rating: ${movie.vote_average}`}
             description={truncate(movie.overview, 75)}
             raised={true}
             href={`/movies/${movie.id}`}
             movie={movie}
-            onClick={(movieDetails(movie.id))}
+            onClick={movieDetails(movie.id)}
           />
-        )
+        );
       });
     return row
     setLoading(false)
