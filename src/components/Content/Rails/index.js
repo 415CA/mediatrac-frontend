@@ -2,7 +2,6 @@ import {rails} from '../Axios'
 
 const railsPost = (authUser) => {
   const {uid, email, displayName, photoURL, phoneNumber } = authUser 
-      debugger;
 
   rails.post('/users', {
       uid: authUser.uid,

@@ -61,12 +61,12 @@ const NavigationAuth = ({ authUser }) => (
           Watched
         </NavLink>
       </Menu.Item> */}
-
+{/* 
       {authUser.roles.includes(ROLES.ADMIN) && (
         <Menu.Item header>
           <NavLink to={ROUTES.ADMIN}>Admin</NavLink>
         </Menu.Item>
-      )}
+      )} */}
 
       <Menu.Menu position="right">
         <Menu.Item header>
