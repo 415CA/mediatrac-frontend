@@ -17,7 +17,6 @@ const railsPost = (authUser) => {
       console.log(error);
     });
 
-debugger
 };
 
 export default railsPost;

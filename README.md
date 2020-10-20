@@ -1,68 +1,115 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Mediatrac
 
-## Available Scripts
+Mediatrac is a travel discovery engine providing information about landmarks, experiences, and restaurants for films around the globe
 
-In the project directory, you can run:
+[Link to Backend API](https://github.com/415CA/mediatrac-backend)
 
-### `npm start`
+![Mediatrac](src/images/homepage.png)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Table of Contents
+* [Getting Started](#getting-started)
+* [Features](#features)
+* [Tech Stack](#tech-stack)
+* [APIs](#apis)
+* [Tools](#tools)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+<a name="getting-started"/>
 
-### `npm test`
+## Getting Started
+1. Install [Rails Backend API](https://github.com/415CA/turismo-backend)
+2. Install [Node.js and npm](https://www.npmjs.com/get-npm)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    ```$ brew install node```
+    
+3. Clone this repo and cd into the directory
+4. Install all dependencies
 
-### `npm run build`
+    ```$ npm install```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+5. Create a [Firebase](https://console.firebase.google.com/u/0/) project with your Google Account 
+6. Create an .env file in the React project's root folder with the following info from your Firebase settings.
+    ```
+    REACT_APP_API_KEY=XXXXxxxx 
+    REACT_APP_AUTH_DOMAIN=xxxxXXXX.firebaseapp.com
+    REACT_APP_DATABASE_URL=https://xxxXXXX.firebaseio.com
+    REACT_APP_PROJECT_ID=xxxxXXXX
+    REACT_APP_STORAGE_BUCKET=xxxxXXXX.appspot.com
+    REACT_APP_MESSAGING_SENDER_ID=xxxxXXXX
+    REACT_APP_CONFIRMATION_EMAIL_REDIRECT=http://localhost:3000
+    ```
+7. Add an API key from [The Movie Database (TMDb) API](https://developers.themoviedb.org/3)  to the .env file
+    ```
+    REACT_APP_TMDB_API_KEY=XXXXX
+    ```
+8. Make sure the Rails server is running and then run the app
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+    ```$ npm start```
+    
+<a name="features"/>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Features
 
-### `npm run eject`
+### Search Films
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Search from over half a million titles in the TMDB database
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![Search Films](src/images/search.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Films
+Each film page contains a description, cast and crew information, trailers, social media links, a NY Times review, and user reviews
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Details Page
 
-## Learn More
+![Details](src/images/detailsAvengers.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Trailers
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![Trailer](src/images/Trailer.gif)
 
-### Code Splitting
+Recommended Films 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+![View Destination](src/images/PosterScroll.gif)
 
-### Analyzing the Bundle Size
+### Favorite Films
+Users can keep track of their favorite films through the My Movies watchlist.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+![Favorite Films](src/images/favorites.png)
 
-### Making a Progressive Web App
+### New Releases
+The New Release page gives you a list of the latest film releases broken down by genre. 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+![New Releases](src/images/genres.png)
 
-### Advanced Configuration
+### Auth & Account Features
+Log in via email and password or existing Google account with [Firebase Authentication](https://firebase.google.com/docs/auth)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+![Auth & Account Features](src/images/signin.png)
 
-### Deployment
+<a name="tech-stack"/>
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+## Tech Stack
+* React.js
+* Ruby on Rails API (Backend: https://github.com/415CA/mediatrac-backend)
+* Firebase
+* PostgreSQL
+* HTML
+* CSS
+* Semantic UI
+* Active Record
+* Active Model Serializer
 
-### `npm run build` fails to minify
+<a name="apis"/>
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## API
+* [The Movie Database (TMDb) API](https://developers.themoviedb.org/3)
+* [NY Times](https://developer.nytimes.com/apis)
+
+<a name="tools"/>
+
+## Tools
+* [Axios](https://www.npmjs.com/package/react-axios)
+* [ActiveModel::Serializer](https://github.com/rails-api/active_model_serializers)
+* [Rack CORS](https://github.com/cyu/rack-cors)
+* [React Slick Carousel](https://www.npmjs.com/package/slick-carousel)
+* [React Router](https://reacttraining.com/react-router/web/guides/quick-start)
+* [Styled Components](https://styled-components.com/)
