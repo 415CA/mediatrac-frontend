@@ -15,7 +15,7 @@ movies.defaults.headers.common['Content-type'] = contentType;
 const image = 'https://image.tmdb.org/t/p/original';
 
 const rails = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://mediatrac.herokuapp.com',
 });
 // rails.defaults.headers.common['Content-type'] = 'Application/json';
 
