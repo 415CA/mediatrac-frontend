@@ -7,7 +7,7 @@ const HomepageList = (props) => (
   // <List animated verticalAlign="middle">
     this.props.map((movie) => {
       return (
-        <List.Item>
+        <List.Item key={movie.tmdb_id}>
           <Image src={`${image}${movie.poster_path}`} />
           <List.Content>
           <h3>{movie.tmdb_id}</h3>

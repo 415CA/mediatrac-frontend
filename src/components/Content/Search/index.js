@@ -1,26 +1,20 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import { movies, image } from '../Axios';
-import { genre } from '../Request';
-
-import { axios } from '../Axios';
+import React, { Fragment, useEffect, useState } from 'react';
+import { Button, Card, Input, Segment } from 'semantic-ui-react';
+import { axios, image } from '../Axios';
 import { API_KEY } from '../Request';
-import { Button, Input, Card, Segment, Icon } from 'semantic-ui-react';
-
-import Movies from '../Movies';
-import Film from '../Films';
 
 const Search = () => {
-  const [feature, setFeature] = useState([]);
   const [data, setData] = useState([]);
   const [query, setQuery] = useState('');
   const [url, setUrl] = useState('');
-  const [loading, setLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       const result = await axios(url);
       setData(result.data.results);
-      setLoading(true)
+      setIsLoading(false);
     };
     fetchData();
   }, [url]);
@@ -35,35 +29,8 @@ const Search = () => {
     localStorage.setItem('selectedMovie', movie);
   };
 
-  const displayRow = (data, loading) => {
-    if (loading) {
-      let row = data.map((movie) => {
-        return (
-          <Card
-            key={movie.id}
-            image={
-              movie.poster_path
-                ? `${image}${movie.poster_path}`
-                : 'https://flixdetective.com/web/images/poster-placeholder.png'
-            }
-            header={movie.title}
-            meta={`Rating: ${movie.vote_average}`}
-            description={truncate(movie.overview, 75)}
-            raised={true}
-            href={`/movies/${movie.id}`}
-            movie={movie}
-            onClick={movieDetails(movie.id)}
-          />
-        );
-      });
-    return row
-    setLoading(false)
-    }
-  }
-
   return (
-    <div>
-      <Segment.Group>
+    <Fragment>
         <Segment padded textAlign="center">
           <h4>Search Movies</h4>
           <Input
@@ -85,14 +52,39 @@ const Search = () => {
           >
           </Button>
         </Segment>
-        <Segment basic>
-          <Card.Group itemsPerRow={5} stackable={true}>
-            {displayRow(data, loading)}
-          </Card.Group>
-        </Segment>
-      </Segment.Group>
-    </div>
-  );
-};
 
-export default Search;
+      {isLoading ? (
+        <div></div>
+      ) : (
+
+      <Segment basic>
+        <Card.Group itemsPerRow={5}>
+        {data.map((movie) => {
+          return (
+            <Card
+              key={movie.id}
+              image={
+                movie.poster_path
+                  ? `${image}${movie.poster_path}`
+                  : 'https://flixdetective.com/web/images/poster-placeholder.png'
+              }
+              header={movie.title}
+              meta={`Rating: ${movie.vote_average}`}
+              description={truncate(movie.overview, 75)}
+              raised={true}
+              href={`/movies/${movie.id}`}
+              movie={movie}
+              onClick={movieDetails(movie.id)}
+            />
+          );
+        })};
+        </Card.Group>
+      </Segment>
+
+      )}
+
+    </Fragment>
+  );
+}
+
+export default Search

@@ -11,7 +11,7 @@ import AccountPage from '../Account';
 import AdminPage from '../Admin';
 
 import Movies from '../Content/Movies';
-import Search from '../Content/Search';
+import Search from '../Content/Search/';
 import Watched from '../Content/Watched';
 import Upcoming from '../Content/Upcoming';
 import Film from '../Content/Films';
