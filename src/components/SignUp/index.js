@@ -149,12 +149,6 @@ class SignUpFormBase extends Component {
             size="small"
           />
         </Form.Group>
-        <Form.Checkbox
-          name="isAdmin"
-          label="Admin"
-          checked={isAdmin}
-          onChange={this.onChangeCheckbox}
-        />
         <Form.Button disabled={isInvalid} type="submit">
           Sign Up
         </Form.Button>
