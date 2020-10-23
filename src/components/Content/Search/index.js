@@ -53,33 +53,32 @@ const Search = () => {
           </Button>
         </Segment>
 
-      {isLoading ? (
-        <div></div>
+      {!data ? (
+        <Fragment></Fragment>
       ) : (
-
-      <Segment basic>
-        <Card.Group itemsPerRow={5}>
-        {data.map((movie) => {
-          return (
-            <Card
-              key={movie.id}
-              image={
-                movie.poster_path
-                  ? `${image}${movie.poster_path}`
-                  : 'https://flixdetective.com/web/images/poster-placeholder.png'
-              }
-              header={movie.title}
-              meta={`Rating: ${movie.vote_average}`}
-              description={truncate(movie.overview, 75)}
-              raised={true}
-              href={`/movies/${movie.id}`}
-              movie={movie}
-              onClick={movieDetails(movie.id)}
-            />
-          );
-        })};
-        </Card.Group>
-      </Segment>
+        <Segment basic>
+          <Card.Group itemsPerRow={5}>
+          {data.map((movie) => {
+            return (
+              <Card
+                key={movie.id}
+                image={
+                  movie.poster_path
+                    ? `${image}${movie.poster_path}`
+                    : 'https://flixdetective.com/web/images/poster-placeholder.png'
+                }
+                header={movie.title}
+                meta={`Rating: ${movie.vote_average}`}
+                description={truncate(movie.overview, 75)}
+                raised={true}
+                href={`/movies/${movie.id}`}
+                movie={movie}
+                onClick={movieDetails(movie.id)}
+              />
+            );
+          })};
+          </Card.Group>
+        </Segment>
 
       )}
 
