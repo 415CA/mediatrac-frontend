@@ -1,6 +1,7 @@
 {
   "name": "mediatrac",
   "version": "0.1.0",
+  "homepage":"https://mediatrac-app.herokuapp.com/",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -17,7 +18,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3",
+    "react-scripts": "^3.4.4",
     "react-slick": "^0.27.11",
     "recompose": "^0.30.0",
     "semantic-ui-css": "^2.4.1",
