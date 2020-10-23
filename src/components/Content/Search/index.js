@@ -64,7 +64,7 @@ const Search = () => {
   return (
     <div>
       <Segment.Group>
-        <Segment padded textAlign="center" stackable={true}>
+        <Segment padded textAlign="center">
           <h4>Search Movies</h4>
           <Input
             width={6}
