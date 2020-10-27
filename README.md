@@ -2,6 +2,8 @@
 
 Mediatrac is a travel discovery engine providing information about landmarks, experiences, and restaurants for films around the globe
 
+[Link to Live Demo](https://mediatrac-app.herokuapp.com/)
+
 [Link to Backend API](https://github.com/415CA/mediatrac-backend)
 
 ![Mediatrac](src/images/homepage.png)
