@@ -4,7 +4,6 @@ import { image } from '../Content/Axios';
 
 const HomepageList = (props) => (
 
-  // <List animated verticalAlign="middle">
     this.props.map((movie) => {
       return (
         <List.Item key={movie.tmdb_id}>

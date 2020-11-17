@@ -1,23 +1,22 @@
 import React, { Component, Fragment } from 'react';
 import { compose } from 'recompose';
+import {
+  Button, Form,
 
+  Grid,
+
+  Icon, Segment
+} from 'semantic-ui-react';
+import { withFirebase } from '../Firebase';
+import PasswordChangeForm from '../PasswordChange';
+import { PasswordForgetForm } from '../PasswordForget';
 import {
   AuthUserContext,
   withAuthorization,
-  withEmailVerification,
+  withEmailVerification
 } from '../Session';
-import { withFirebase } from '../Firebase';
-import { PasswordForgetForm } from '../PasswordForget';
-import PasswordChangeForm from '../PasswordChange';
 
-import {
-  Form,
-  Button,
-  Grid,
-  Segment,
-  Icon, 
-  Divider
-} from 'semantic-ui-react';
+
 
 const SIGN_IN_METHODS = [
   {

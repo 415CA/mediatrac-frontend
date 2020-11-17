@@ -1,23 +1,17 @@
-import React, { useEffect, useState, Fragment } from 'react';
-import { axios, movies, image, nytimes } from '../../Content/Axios';
-import { explore, nytreviews } from '../../Content/Request';
-import {
-  Grid,
-  Image,
-  Header,
-  Container,
-  Embed,
-  Comment,
-  Card,
-  Icon,
-  List,
-  Divider,
-  Modal, 
-  Button
-} from 'semantic-ui-react';
-
-import WatchedButton from '../Watched'
+import React, { Fragment, useEffect, useState } from 'react';
 import Slider from 'react-slick';
+import {
+  Card, Comment, Container,
+  Divider, Embed, Grid,
+  Header,
+  Icon, Image,
+  List,
+  Modal
+} from 'semantic-ui-react';
+import { axios, image, movies, nytimes } from '../../Content/Axios';
+import { explore, nytreviews } from '../../Content/Request';
+import WatchedButton from '../Watched';
+
 
 const MovieDetails = (props) => {
   const tmdbID = props.match.params.id;
@@ -59,14 +53,12 @@ const MovieDetails = (props) => {
                   filterReview(responses[0].data.title, response.data.results)
                 );
               });
-            // spotify.get(album(responses[0].data.title))
-            // .then(response => console.log(response));
           })
         );
       return detailObject
     }
       details();
-  }, []);
+  }, [tmdbID]);
 
   useEffect(() => {
     async function getNYT() {
@@ -80,7 +72,7 @@ const MovieDetails = (props) => {
       return request;
     }
     getNYT();
-  }, []);
+  }, [details.title]);
 
   const filterReview = (title, reviews) => {
     return reviews.filter((review) => review.display_title === title)[0];
@@ -115,8 +107,6 @@ const MovieDetails = (props) => {
     };
 
     const poster = (movie) => `${image}${movie.poster_path}`;
-    const castPicture = (actor) => `${image}${actor.profile_path}`;
-    const crewPicture = (crew) => `${image}${crew.profile_path}`;
 
     const selectImage = (picture) => {
       return picture ? picture : 'https://flixdetective.com/web/images/poster-placeholder.png'; 
@@ -128,7 +118,6 @@ const MovieDetails = (props) => {
         return (
           <Image
             key={movie.id}
-            // src={`${image}${movie.poster_path}`}
             src={selectImage(poster(movie))}
             as="a"
             size="small"
@@ -137,27 +126,6 @@ const MovieDetails = (props) => {
         );
       });
     }
-
-    
-    // let videoToRender; 
-    // if (videos.results) {
-    //   videoToRender = videos.results.slice(0, 10).map((movie) => {
-    //     return (
-    //       <Fragment key={movie.key}>
-    //         <Header as='h5' >{truncate(movie.name, 30)}</Header>
-    //         <Embed
-    //           id={movie.key}
-    //           placeholder={`${image}${details.backdrop_path}`}
-    //           source="youtube"
-    //           size="medium"
-    //           hd={true}
-    //         />
-    //       </Fragment>
-    //     );
-    //   });
-    // }
-
-    const [open, setOpen] = React.useState(false);
 
     let videoToRender; 
     if (videos.results) {
@@ -247,7 +215,6 @@ const MovieDetails = (props) => {
           <div key={crew.id + crew.job}>
             <Card
               key={crew.id + crew.job}
-              // image={`${image}${crew.profile_path}`}
               image={
                 crew.profile_path
                   ? `${image}${crew.profile_path}`
@@ -412,18 +379,15 @@ const MovieDetails = (props) => {
             inverted
             style={{
               width: 1024,
-              height: 320,
+              height: 420,
               display: 'inline-block',
-              // opacity: 0.5,
               backgroundImage: `url(${image}${details.backdrop_path})`,
               backgroundSize: 'cover',
-              // fontSize: mobile ? '2em' : '4em',
               fontWeight: 'normal',
               marginBottom: 0,
-              // marginTop: mobile ? '1.5em' : '3em',
             }}
           >
-            {details.title}
+            {/* {details.title} */}
           </Header>
         </Container>
       );

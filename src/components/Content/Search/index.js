@@ -1,19 +1,25 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { Button, Card, Input, Segment } from 'semantic-ui-react';
+import { Button, Card, Input, Segment, Form } from 'semantic-ui-react';
 import { axios, image } from '../Axios';
 import { API_KEY } from '../Request';
 
 const Search = () => {
   const [data, setData] = useState([]);
   const [query, setQuery] = useState('');
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState(`https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=en-US`);
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsError(false);
       setIsLoading(true);
-      const result = await axios(url);
-      setData(result.data.results);
+      try {
+        const result = await axios(url);
+        setData(result.data.results);
+      } catch (error) {
+        setIsError(true);
+      }
       setIsLoading(false);
     };
     fetchData();
@@ -31,7 +37,13 @@ const Search = () => {
 
   return (
     <Fragment>
-        <Segment padded textAlign="center">
+        <Form
+          onSubmit={(e) => {
+            setUrl(
+              `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&include_adult=false`
+            );
+            e.preventDefault();
+          }}>
           <h4>Search Movies</h4>
           <Input
             width={6}
@@ -43,18 +55,13 @@ const Search = () => {
           <Button
             compact
             icon="search"
-            type="button"
-            onClick={() => {
-              setUrl(
-                `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&include_adult=false`
-              );
-            }}
+            type="submit"
           >
           </Button>
-        </Segment>
-
-      {!data ? (
-        <Fragment></Fragment>
+        </Form>
+        
+      {isLoading ? (
+        <div>Loading ...</div>
       ) : (
         <Segment basic>
           <Card.Group itemsPerRow={5}>

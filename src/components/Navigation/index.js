@@ -1,12 +1,9 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-
+import { Container, Icon, Menu } from 'semantic-ui-react';
+import * as ROUTES from '../../constants/routes';
 import { AuthUserContext } from '../Session';
 import SignOutButton from '../SignOut';
-import * as ROUTES from '../../constants/routes';
-import * as ROLES from '../../constants/roles';
-
-import { Container, Menu, Icon} from 'semantic-ui-react';
 
 const Navigation = () => (
   <AuthUserContext.Consumer>
@@ -18,7 +15,6 @@ const Navigation = () => (
 
 const NavigationAuth = ({ authUser }) => (
   <Menu stackable secondary>
-    {/* <Menu pointing secondary vertical> */}
     <Container>
       <Menu.Item header>
         <NavLink to={ROUTES.LANDING}>
@@ -34,13 +30,6 @@ const NavigationAuth = ({ authUser }) => (
         </NavLink>
       </Menu.Item>
 
-      {/* <Menu.Item header>
-        <NavLink to={ROUTES.MOVIES}>
-          <Icon name="video" />
-          Movies
-        </NavLink>
-      </Menu.Item> */}
-
       <Menu.Item header>
         <NavLink to={ROUTES.UPCOMING}>
           <Icon name="star" />
@@ -54,19 +43,6 @@ const NavigationAuth = ({ authUser }) => (
           Search
         </NavLink>
       </Menu.Item>
-
-      {/* <Menu.Item header>
-        <NavLink to={ROUTES.WATCHED}>
-          <Icon name="television" />
-          Watched
-        </NavLink>
-      </Menu.Item> */}
-{/* 
-      {authUser.roles.includes(ROLES.ADMIN) && (
-        <Menu.Item header>
-          <NavLink to={ROUTES.ADMIN}>Admin</NavLink>
-        </Menu.Item>
-      )} */}
 
       <Menu.Menu position="right">
         <Menu.Item header>
@@ -84,7 +60,7 @@ const NavigationAuth = ({ authUser }) => (
 );
 
 const NavigationNonAuth = () => (
-  <Menu stackable secondary>
+  <Menu secondary>
     <Container>
       <Menu.Item header>
         <NavLink to={ROUTES.LANDING}>

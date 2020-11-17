@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { axios, movies, image } from '../../Content/Axios';
-import { genre } from '../../Content/Request';
-import {
-
-  Image,
-  Header,
-} from 'semantic-ui-react';
-
-// import { useHistory } from 'react-router-dom';
-
 import Slider from 'react-slick';
-import { componentFromStreamWithConfig } from 'recompose';
+import {
+  Header, Image
+} from 'semantic-ui-react';
+import { axios, image, movies } from '../../Content/Axios';
+import { genre } from '../../Content/Request';
+
 
 const Upcoming = () => {
-  // const [feature, setFeature] = useState([]);
   const [action, setAction] = useState([]);
   const [adventure, setAdventure] = useState([]);
   const [animation, setAnimation] = useState([]);
@@ -26,38 +20,6 @@ const Upcoming = () => {
   const [scienceFiction, setScienceFiction] = useState([]);
   const [thriller, setThriller] = useState([]);
   const [trending, setTrending] = useState([]);
-  // const [popular, setPopular] = useState([]);
-  // const [discover, setDiscover] = useState([]);
-  // const [upcoming, setUpcoming] = useState([]);
-  // const [nowPlaying, setNowPlaying] = useState([]);
-
-  // const categories = [
-  //   action,
-  //   adventure,
-  //   animation,
-  //   comedy,
-  //   documentary,
-  //   drama,
-  //   family,
-  //   horror,
-  //   romance,
-  //   scienceFiction,
-  //   thriller,
-  //   trending,
-  //   popular,
-  //   discover,
-  //   upcoming,
-  //   nowPlaying,
-  // ];
-
-  // useEffect(() => {
-  //   const getBanner = () => {
-  //     movies.get(genre.family).then((display) => {
-  //       setFeature(display.data.results);
-  //     });
-  //   };
-  //   getBanner();
-  // }, []);
 
   useEffect(() => {
     async function details() {
@@ -75,10 +37,6 @@ const Upcoming = () => {
           movies.get(genre.scienceFiction),
           movies.get(genre.thriller),
           movies.get(genre.trending),
-          // movies.get(genre.popular),
-          // movies.get(genre.discover),
-          // movies.get(genre.upcoming),
-          // movies.get(genre.nowPlaying),
         ])
         .then(
           axios.spread((...responses) => {
@@ -95,69 +53,12 @@ const Upcoming = () => {
             setScienceFiction(responses[9].data.results);
             setThriller(responses[10].data.results);
             setTrending(responses[11].data.results);
-            // setDiscover(responses[13].data.results)
-            // setPopular(responses[12].data.results)
-            // setUpcoming(responses[14].data.results)
-            // setNowPlaying(responses[15].data.results)
           })
         );
       return detailObject;
     }
     details();
   }, []);
-
-  const truncate = (description, n) => {
-    return description?.length > n
-      ? description.substr(0, n - 1) + '...'
-      : description;
-  };
-
-  // const createCard =
-  //   feature.map((movie) => {
-  //     return (
-  //       <>
-  //         <Card
-  //           key={movie.id}
-  //           image={`${image}${movie.poster_path}`}
-  //           header={movie.title}
-  //           meta={`Rating: ${movie.vote_average}`}
-  //           description={truncate(movie.overview, 75)}
-  //           raised={true}
-  //         />
-  //       </>
-  //     );
-  //   });
-
-  // const sliderPosters = (category) => {
-  //   category.map((movie) => {
-  //     return (
-  //       <Image
-  //         key={movie.id}
-  //         src={`${image}${movie.poster_path}`}
-  //         as="a"
-  //         size="small"
-  //         href={`/movies/${movie.id}`}
-  //       />
-  //     );
-  //   });
-  // };
-
-  // let actionToRender;
-  // if (action) {
-  //   actionToRender = action.map((movie) => {
-  //     return (
-  //       <Image
-  //         key={movie.id}
-  //         src={`${image}${movie.poster_path}`}
-  //         as="a"
-  //         size="small"
-  //         href={`/movies/${movie.id}`}
-  //       />
-  //     );
-  //   });
-  // }
-
-  console.log(action)
 
   const posters = (films) => {
     const allPosters = films.map((film) => {
@@ -173,10 +74,6 @@ const Upcoming = () => {
     });
     return allPosters
   };
-
-  // const displayGenres = (film) => {
-  //   if ()
-  // }
 
   const sliderSettings = {
     className: 'center',
@@ -199,9 +96,6 @@ const Upcoming = () => {
     );
   };
 
-  // const displayPosterSlider = (category) => {
-  //   return categorySliders(posters(category))
-  // }
 
   console.log('Action', action);
   console.log('Drama', drama);
@@ -256,11 +150,6 @@ const Upcoming = () => {
         Thriller
       </Header>
       {categorySliders(posters(thriller))}
-
-      {/* {categorySliders(posters(popular))}
-      {categorySliders(posters(discover))}
-      {categorySliders(posters(upcoming))}
-      {categorySliders(posters(nowPlaying))} */}
     </div>
   );
 };

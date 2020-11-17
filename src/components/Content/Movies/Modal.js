@@ -1,10 +1,7 @@
-import React, { useEffect, useState, Fragment } from 'react';
-import { axios, movies, image, nytimes } from '../../Content/Axios';
-import { explore, nytreviews } from '../../Content/Request';
-import { Modal, Button, Image, Header, Embed } from 'semantic-ui-react';
+import React from 'react';
+import { Embed, Header, Image, Modal } from 'semantic-ui-react';
+import { image } from '../../Content/Axios';
 
-import WatchedButton from '../Watched';
-import Slider from 'react-slick';
 
 const VideoModal = (movie, details) => {
   const [open, setOpen] = React.useState(false);
@@ -32,9 +29,6 @@ const VideoModal = (movie, details) => {
           size="medium"
           hd={true}
         />
-        <Modal.Description>
-          <p>Would you like to upload this image?</p>
-        </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
         <Image
@@ -42,10 +36,6 @@ const VideoModal = (movie, details) => {
           src={`${image}${details.backdrop_path}`}
           onClick={() => setOpen(false)}
         />
-        {/* <Button onClick={() => setOpen(false)}>Cancel</Button>
-              <Button onClick={() => setOpen(false)} positive>
-                Ok
-              </Button> */}
       </Modal.Actions>
     </Modal>
   );

@@ -1,17 +1,9 @@
 import React, { useState } from 'react';
-import { List, Icon } from 'semantic-ui-react';
-import { rails } from '../../Content/Axios';
+import { Icon } from 'semantic-ui-react';
 
 const DeleteButton = (props) => {
   const [click, setClick] = useState(false);
   const [movie, deleteRequest ] = props
-
-
-  // const deleteRequest = (movie) => {
-  //   rails
-  //   .delete(`/movies/${movie.id}`)
-  //   .then((response) => displayRow(response));
-  // };
 
   const changeColor = (movie) => {
     return click ? (

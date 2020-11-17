@@ -1,10 +1,7 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import { image, rails } from '../../Content/Axios';
-
-import { Card, Header, Image, Button } from 'semantic-ui-react';
-import MovieDetails from './MovieDetails';
-
+import React, { Fragment, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Button, Card, Header, Image } from 'semantic-ui-react';
+import { image, rails } from '../../Content/Axios';
 
 const Movies = () => {
   const [feature, setFeature] = useState([]);
@@ -46,7 +43,6 @@ const Movies = () => {
   const displayRow = (feature) => {
     let featureCards = feature.map((movie) => {
       return (
-        <>
           <Card key={movie.tmdb_id} raised>
             <Image
               src={`${image}${movie.poster_path}`}
@@ -60,15 +56,13 @@ const Movies = () => {
                 <span>{truncate(movie.overview, 75)}</span>
               </Card.Meta>
             </Card.Content>
-            <Card.Content extra inline>
+            <Card.Content extra >
               <Button
                 icon="trash alternate outline"
                 size="tiny"
                 color="red"
                 onClick={() => deleteCard(movie)}
               />
-              {/* Remove
-              </Button> */}
               <Button
                 size="tiny"
                 color="blue"
@@ -78,7 +72,6 @@ const Movies = () => {
               </Button>
             </Card.Content>
           </Card>
-        </>
       );
     });
     return featureCards;

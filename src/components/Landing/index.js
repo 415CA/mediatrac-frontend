@@ -57,7 +57,6 @@ const Landing = () => {
   }, []);
 
   const { banner, data } = feature;
-  console.log("Banner", banner);
 
   const truncate = (description, n) => {
     return description?.length > n

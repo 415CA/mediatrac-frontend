@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import { compose } from 'recompose';
-
-import { withAuthorization, withEmailVerification } from '../Session';
+import Movies from '../Content/Movies';
 import { withFirebase } from '../Firebase';
-import { List } from 'semantic-ui-react';
-import HomepageList from '.'
-import { rails } from '../Content/Axios';
-
-import Movies from '../Content/Movies'
+import { withAuthorization, withEmailVerification } from '../Session';
 
 class HomePage extends Component {
   constructor(props) {
@@ -24,18 +19,11 @@ class HomePage extends Component {
         users: snapshot.val(),
       });
     });
-
-    rails.get('/movies')
-    .then(response => {
-      console.log(response); 
-      this.state.movies = response.data; 
-    })
   }
 
   componentWillUnmount() {
     this.props.firebase.users().off();
   }
-
 
   render() {
     return (

@@ -20,25 +20,23 @@ const WatchedButton = (details) => {
         overview: details.overview,
         poster_path: details.poster_path,
       },)
-      // .then(response => setId(response.id));
-      .then(response => {setId(response.data.id); console.log("Post", response.data)});
-      console.log("ID", id)
+      .then(response => {setId(response.data.id)});
       setClick(true);
   }
 
   const changeColor = (details) => {
     return click ? (
       <Icon
-        name="add"
+        name="thumbs down"
         circular
         color="red"
         onClick={() => deleteRequest(details)}
       />
     ) : (
       <Icon
-        name="add"
+        name="thumbs up"
         circular
-        color="grey"
+        color="green"
         onClick={() => postRequest(details)}
       />
     );

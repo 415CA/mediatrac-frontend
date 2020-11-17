@@ -1,27 +1,20 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
-import Navigation from '../Navigation';
-import LandingPage from '../Landing';
-import SignUpPage from '../SignUp';
-import SignInPage from '../SignIn';
-import PasswordForgetPage from '../PasswordForget';
-import HomePage from '../Home';
+import { Container } from 'semantic-ui-react';
+import * as ROUTES from '../../constants/routes';
 import AccountPage from '../Account';
 import AdminPage from '../Admin';
-
 import Movies from '../Content/Movies';
-import Search from '../Content/Search/';
-import Watched from '../Content/Watched';
-import Upcoming from '../Content/Upcoming';
-import Film from '../Content/Films';
-
-
-import * as ROUTES from '../../constants/routes';
-import { withAuthentication } from '../Session';
-
-import { Container, Grid } from 'semantic-ui-react';
 import MovieDetails from '../Content/Movies/MovieDetails';
+import Search from '../Content/Search/';
+import Upcoming from '../Content/Upcoming';
+import HomePage from '../Home';
+import LandingPage from '../Landing';
+import Navigation from '../Navigation';
+import PasswordForgetPage from '../PasswordForget';
+import { withAuthentication } from '../Session';
+import SignInPage from '../SignIn';
+import SignUpPage from '../SignUp';
 
 const App = () => (
   <Container>
@@ -44,10 +37,7 @@ const App = () => (
 
             <Route exact path={ROUTES.MOVIES} component={Movies} />
             <Route exact path={ROUTES.MOVIE_DETAILS} component={MovieDetails} />
-            <Route exact path={ROUTES.FILMS} component={Film} />
-            <Route exact path={ROUTES.FILM_DETAILS} component={Film} />
             <Route exact path={ROUTES.SEARCH} component={Search} />
-            <Route exact path={ROUTES.WATCHED} component={Watched} />
             <Route exact path={ROUTES.UPCOMING} component={Upcoming} />
 
       </div>
